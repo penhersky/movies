@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.auth {
+  position: absolute;
+  top: 50%;
+  color: $global-revers-color;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #535353;
+  text-align: center;
+  color: wheat;
+  form {
+    display: flex;
+    flex-flow: wrap column;
+    padding: 50px;
+    width: 360px;
+  }
+}
