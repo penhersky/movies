@@ -28,7 +28,7 @@ export default () => {
       <h1>Log in</h1>
       <TextField
         id="outlined-basic"
-        label="Outlined"
+        label="Email"
         variant="outlined"
         error={errorEmail}
         value={email}
@@ -37,7 +37,7 @@ export default () => {
       />
       <TextField
         id="outlined-basic"
-        label="Outlined"
+        label="Password"
         variant="outlined"
         error={errorPassword}
         onChange={onChangePassword}
