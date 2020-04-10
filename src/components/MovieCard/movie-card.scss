@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 .movie-card {
-  max-width: 350px;
+  max-width: 300px;
   margin: 20px;
   cursor: pointer;
   .card-content {
@@ -27,12 +27,14 @@
     }
   }
   :hover {
-    .card-image {
-      height: 500px;
-      transition: 0.2s linear;
-    }
-    .card-inf {
-      display: none;
+    .card-content {
+      .card-image {
+        height: 500px;
+        transition: 0.2s linear;
+      }
+      // .card-inf {
+      //   display: none;
+      // }
     }
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { Login } from '../../pages';
+import Login from './Login';
 import page404 from '../404';
 
 export default () => {

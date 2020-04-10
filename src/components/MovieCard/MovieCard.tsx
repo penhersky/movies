@@ -5,38 +5,32 @@ import { Rating } from '@material-ui/lab';
 
 import './movie-card.scss';
 
-export default (props: {
-  id: string;
-  title: string;
-  poster: string;
-  rating: number;
-  data: String;
-}) => {
+export default ({ data }: { data: any }) => {
   return (
     <Card className="movie-card">
       <CardActionArea className="movie-card">
-        <NavLink to={`/library/movie/${props.id}`}>
+        <NavLink to={`/library/movie/${data.id}`}>
           <div className="card-content">
             <CardMedia
               component="img"
               alt="..."
               height="400"
-              image={props.poster}
+              image={data.poster}
               className="card-image"
             />
             <div className="card-inf">
-              <h2>{props.title}</h2>
+              <h2>{data.title}</h2>
               <div className="card-data">
                 <Rating
                   size="small"
                   name="half-rating-read"
-                  defaultValue={props.rating}
+                  defaultValue={data.rating}
                   precision={0.1}
                   className="rating"
                   max={10}
                   readOnly
                 />
-                <p>{props.data}</p>
+                <p>{data.realizeData}</p>
               </div>
             </div>
           </div>

@@ -11,14 +11,7 @@ export default () => {
     <div className="library">
       <div className="movies-list">
         {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            id={movie.id}
-            poster={movie.poster}
-            title={movie.title}
-            data={movie.realizeData}
-            rating={movie.rating}
-          />
+          <MovieCard key={movie.id} data={movie} />
         ))}
       </div>
     </div>

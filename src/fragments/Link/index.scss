@@ -1,0 +1,12 @@
+@import '../../variables.scss';
+
+.link {
+  text-decoration: none;
+  margin: 2px 0 2px 0;
+  cursor: pointer;
+  font-size: 18px;
+  color: $global-link-color;
+}
+.link:hover {
+  color: $global-link-hover-color;
+}
