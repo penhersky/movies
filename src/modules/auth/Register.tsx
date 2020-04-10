@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 import { AuthForm } from '../../components';
 import { Link } from '../../fragments';
@@ -10,6 +11,7 @@ export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState({ password: '', passwordRepeat: '' });
   const [userName, setUserName] = useState('');
+  const [error, setError] = useState('ghhjkl');
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorUserName, setErrorUserName] = useState(false);
@@ -32,6 +34,13 @@ export default () => {
   return (
     <AuthForm Submit={subminForm}>
       <h1>Account creation</h1>
+      {error ? (
+        <Alert style={{ marginBottom: '20px' }} variant="filled" severity="error">
+          {error}
+        </Alert>
+      ) : (
+        <></>
+      )}
       <TextField
         label="User Name"
         variant="outlined"

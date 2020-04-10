@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 import { AuthForm } from '../../components';
 import { Link } from '../../fragments';
 
 import './auth.scss';
 
+type MSG = 'info' | 'error' | 'success' | 'warning' | undefined;
+
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState({
+    msg: '',
+    type: undefined,
+    exs: false,
+  });
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
 
@@ -23,9 +31,18 @@ export default () => {
     setPassword('');
   };
 
+  const showMessage = (text: string, type: MSG) => {
+    return (
+      <Alert variant="filled" severity={type}>
+        {text}
+      </Alert>
+    );
+  };
+
   return (
     <AuthForm Submit={subminForm}>
       <h1>Log in</h1>
+      {message.exs ? showMessage(message.msg, message.type) : null}
       <TextField
         id="outlined-basic"
         label="Email"
