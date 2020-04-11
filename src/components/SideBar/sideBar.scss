@@ -1,0 +1,59 @@
+@import '../../variables.scss';
+
+.side-bar {
+  position: relative;
+  z-index: 980px;
+  height: 50px;
+  width: 100%;
+  background-color: rgb(96, 96, 119);
+  .side-content {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 10px;
+    #logo {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    #side-list {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      .side-item {
+        list-style: none;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 100%;
+        cursor: pointer;
+        .side-item-card {
+          height: 100%;
+          font-size: 16px;
+          .side-link {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 70px;
+            align-items: center;
+            text-decoration: none;
+            color: $global-primary-background;
+          }
+        }
+      }
+      .active {
+        font-size: 20px;
+        border-bottom: solid 1px $global-revers-color;
+      }
+    }
+  }
+  .user-link {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+}
