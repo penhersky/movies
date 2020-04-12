@@ -7,8 +7,9 @@ import Page404 from '../404';
 
 export default () => {
   return (
-    <div className="home" style={{ height: '1200px' }}>
+    <div>
       <Route path={['/', '/library', '/top']} component={SideBar} />
+
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/library" component={Library} />

@@ -1,14 +1,14 @@
 @import '../../variables.scss';
 
 .side-bar {
-  position: relative;
+  position: fixed;
   z-index: 980px;
   height: 50px;
   width: 100%;
-  background-color: rgb(96, 96, 119);
+  background-color: #6d6d6d;
   .side-content {
     display: flex;
-    flex-flow: wrap row;
+    flex-flow: nowrap row;
     justify-content: space-between;
     height: 100%;
     margin: 0 10px;
@@ -25,6 +25,7 @@
       justify-content: center;
       align-items: center;
       margin: 0;
+      padding: 0;
       .side-item {
         list-style: none;
         margin-left: 10px;
@@ -49,6 +50,10 @@
         font-size: 20px;
         border-bottom: solid 1px $global-revers-color;
       }
+    }
+    .right-side {
+      display: flex;
+      flex-flow: row wrap;
     }
   }
   .user-link {
