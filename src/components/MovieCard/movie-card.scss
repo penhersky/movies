@@ -8,6 +8,12 @@
     height: 500px;
     color: $global-revers-color;
     background-color: $global-primary-background;
+    .card-image {
+      transition: height 0.2s cubic-bezier(1, 1, 1, 1) 100ms;
+      &:hover {
+        height: 500px;
+      }
+    }
     .card-inf {
       h2 {
         text-align: center;
@@ -24,17 +30,6 @@
           margin: 5px;
         }
       }
-    }
-  }
-  :hover {
-    .card-content {
-      .card-image {
-        height: 500px;
-        transition: 0.2s linear;
-      }
-      // .card-inf {
-      //   display: none;
-      // }
     }
   }
 }
