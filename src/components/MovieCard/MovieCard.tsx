@@ -9,7 +9,7 @@ export default ({ data }: { data: any }) => {
   return (
     <Card className="movie-card">
       <CardActionArea className="movie-card">
-        <NavLink to={`/library/movie/${data.id}`}>
+        <NavLink to={`/library/movie/${data.id}`} style={{ textDecoration: 'none' }}>
           <div className="card-content">
             <CardMedia
               component="img"

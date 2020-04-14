@@ -1,10 +1,7 @@
 @import '../../variables.scss';
 
 .side-bar {
-  position: static;
-  z-index: 980px;
   height: 50px;
-  width: 100%;
   background-color: #6d6d6d;
   .side-content {
     display: flex;
@@ -28,8 +25,6 @@
       padding: 0;
       .side-item {
         list-style: none;
-        margin-left: 10px;
-        margin-right: 10px;
         height: 100%;
         cursor: pointer;
         .side-item-card {

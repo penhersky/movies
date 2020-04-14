@@ -4,9 +4,27 @@ import { CardActionArea, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Slide from '@material-ui/core/Slide';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import './sideBar.scss';
 
+interface Props {
+  window?: () => Window;
+  children: React.ReactElement;
+}
+
+function HideOnScroll(props: Props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     search: {
@@ -51,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default (props: { user?: any }) => {
+export default (props: { user?: any; window?: () => Window }) => {
   const classes = useStyles();
 
   const [text, setText] = useState('');
@@ -69,68 +87,66 @@ export default (props: { user?: any }) => {
     setText('');
   };
 
-  window.addEventListener('scroll', () => {
-    console.log(window.scrollY);
-  });
-
   return (
-    <div className="side-bar">
-      <div className="side-content">
-        <h2 id="logo">Logo</h2>
-        <ul id="side-list" style={{ display: showList ? 'flex' : 'none' }}>
-          <li className="side-item">
-            <CardActionArea className="side-item-card">
-              <NavLink exact to="/" className="side-link">
-                home
+    <HideOnScroll window={props.window}>
+      <AppBar className="side-bar">
+        <div className="side-content">
+          <h2 id="logo">Logo</h2>
+          <ul id="side-list" style={{ display: showList ? 'flex' : 'none' }}>
+            <li className="side-item">
+              <CardActionArea className="side-item-card">
+                <NavLink exact to="/" className="side-link">
+                  home
+                </NavLink>
+              </CardActionArea>
+            </li>
+            <li className="side-item">
+              <CardActionArea className="side-item-card">
+                <NavLink to="/library" className="side-link">
+                  library
+                </NavLink>
+              </CardActionArea>
+            </li>
+            <li className="side-item">
+              <CardActionArea className="side-item-card">
+                <NavLink to="/top" className="side-link">
+                  top
+                </NavLink>
+              </CardActionArea>
+            </li>
+          </ul>
+          <div className="right-side">
+            <form className={classes.search} onSubmit={onSubmitSearch}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                onFocus={() => setShowList(false || window.innerWidth > 740)}
+                onBlur={() => setShowList(true)}
+                value={text}
+                onChange={onChangeSearch}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </form>
+            {auth ? (
+              <NavLink to={`/user/account/${id}`} className="link user-link">
+                <AccountCircleIcon />
               </NavLink>
-            </CardActionArea>
-          </li>
-          <li className="side-item">
-            <CardActionArea className="side-item-card">
-              <NavLink to="/library" className="side-link">
-                library
-              </NavLink>
-            </CardActionArea>
-          </li>
-          <li className="side-item">
-            <CardActionArea className="side-item-card">
-              <NavLink to="/top" className="side-link">
-                top
-              </NavLink>
-            </CardActionArea>
-          </li>
-        </ul>
-        <div className="right-side">
-          <form className={classes.search} onSubmit={onSubmitSearch}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              onFocus={() => setShowList(false || window.innerWidth > 740)}
-              onBlur={() => setShowList(true)}
-              value={text}
-              onChange={onChangeSearch}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </form>
-          {auth ? (
-            <NavLink to={`/user/account/${id}`} className="link user-link">
-              <AccountCircleIcon />
-            </NavLink>
-          ) : (
-            <>
-              <NavLink to="/account/login" className="link user-link">
-                Sing in
-              </NavLink>
-            </>
-          )}
+            ) : (
+              <>
+                <NavLink to="/account/login" className="link user-link">
+                  Sing in
+                </NavLink>
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </div>
+      </AppBar>
+    </HideOnScroll>
   );
 };
