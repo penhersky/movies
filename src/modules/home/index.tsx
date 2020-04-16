@@ -9,7 +9,7 @@ import Page404 from '../404';
 
 export default () => {
   return (
-    <div>
+    <>
       <Route path={['/', '/library', '/top']} component={Header} window={() => window} />
       <Toolbar id="back-to-top-anchor" />
       <Switch>
@@ -19,6 +19,6 @@ export default () => {
         <Route path="*" component={Page404} />
       </Switch>
       <ScrollTop window={() => window} />
-    </div>
+    </>
   );
 };

@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { GET_MOVIE } from '../../types/movie';
 
 import './movie.scss';
 
 export default (props: any) => {
-  console.log(props.match.params.id);
-  return <div>Movie page</div>;
+  const id = props.match.params.id;
+  const dispatch = useDispatch();
+
+  const movies = useSelector((store: any) => store.movieReducer);
+
+  useEffect(() => {
+    dispatch({ type: GET_MOVIE, id });
+  }, [dispatch, id]);
+
+  return (
+    <div>
+      <h1>{movies.openMovie.title}</h1>
+    </div>
+  );
 };
