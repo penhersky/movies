@@ -1,13 +1,14 @@
 import React from 'react';
 import { Card, CardActionArea, CardMedia } from '@material-ui/core';
+import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { Rating } from '@material-ui/lab';
 
 import './movie-card.scss';
 
-export default ({ data }: { data: any }) => {
+export default ({ data, className }: { data: any; className?: string }) => {
   return (
-    <Card className="movie-card">
+    <Card className={classNames('movie-card', className)}>
       <CardActionArea className="movie-card">
         <NavLink to={`/library/movie/${data.id}`} style={{ textDecoration: 'none' }}>
           <div className="card-content">

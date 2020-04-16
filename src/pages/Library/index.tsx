@@ -11,7 +11,9 @@ export default () => {
     <div className="library">
       <div className="movies-list">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} data={movie} />
+          <div key={movie.id}>
+            <MovieCard data={movie} />
+          </div>
         ))}
       </div>
     </div>
