@@ -12,12 +12,15 @@ type MSG = 'info' | 'error' | 'success' | 'warning' | undefined;
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [message, setMessage] = useState({
     msg: '',
     type: undefined,
     exs: false,
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorEmail, setErrorEmail] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorPassword, setErrorPassword] = useState(false);
 
   const onChangeEmail = (e: any) => setEmail(e.target.value);

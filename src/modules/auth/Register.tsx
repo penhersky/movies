@@ -11,9 +11,13 @@ export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState({ password: '', passwordRepeat: '' });
   const [userName, setUserName] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState('ghhjkl');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorEmail, setErrorEmail] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorPassword, setErrorPassword] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorUserName, setErrorUserName] = useState(false);
 
   const onChangeUserName = (e: any) => setUserName(e.target.value);
