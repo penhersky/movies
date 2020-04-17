@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { Card, CardActionArea, CardMedia, Tooltip } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { Rating } from '@material-ui/lab';
+
+import { ADD_TO_WILL_WATCH } from '../../types/movie';
 
 import { useSnackbar } from 'notistack';
 
@@ -11,13 +14,22 @@ import './movie-card.scss';
 
 export default ({ data, className }: { data: any; className?: string }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
 
   const add = useCallback(() => {
-    enqueueSnackbar('Movies added to "Will watch"', {
+    dispatch({
+      type: ADD_TO_WILL_WATCH,
+      id: data.id,
+      title: data.title,
+      poster: data.poster,
+      rating: data.rating,
+      realizeData: data.realizeData,
+    });
+    enqueueSnackbar(`Movie "${data.title}" added to Will watch`, {
       variant: 'success',
       anchorOrigin: { vertical: 'top', horizontal: 'left' },
     });
-  }, [enqueueSnackbar]);
+  }, [enqueueSnackbar, dispatch, data]);
 
   return (
     <Card className={classNames('movie-card', className)}>
