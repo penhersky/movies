@@ -16,6 +16,7 @@
     "@types/react-dom": "^16.9.0",
     "classnames": "^2.2.6",
     "gsap": "^3.2.6",
+    "notistack": "^0.9.9",
     "pixi.js": "^5.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { SnackbarProvider } from 'notistack';
 
 import './App.scss';
 
@@ -27,12 +28,14 @@ const theme = createMuiTheme({
 export default () => {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <Switch>
-          <Route path="/account" component={Auth} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </div>
+      <SnackbarProvider maxSnack={3}>
+        <div className="App">
+          <Switch>
+            <Route path="/account" component={Auth} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </div>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 };

@@ -4,14 +4,35 @@
   max-width: 300px;
   margin: 20px;
   cursor: pointer;
+  &:hover {
+    .add-watch {
+      transition: linear 1.2s;
+      display: inline;
+    }
+  }
+  .add-watch {
+    position: absolute;
+    color: $global-revers-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+  }
   .card-content {
     height: 500px;
-    color: $global-revers-color;
     background-color: $global-primary-background;
-    .card-image {
-      transition: height 0.2s cubic-bezier(1, 1, 1, 1) 100ms;
-      &:hover {
-        height: 500px;
+    color: $global-revers-color;
+    .card-hover {
+      .card-image {
+        transition: height 0.2s cubic-bezier(1, 1, 1, 1) 100ms;
+        &:hover {
+          height: 500px;
+        }
       }
     }
     .card-inf {
