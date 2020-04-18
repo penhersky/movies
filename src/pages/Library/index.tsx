@@ -5,18 +5,20 @@ import { MovieCard } from '../../components';
 
 import './index.scss';
 
-export default () => {
+export default (props: any) => {
   const { movies } = useSelector((state: any) => state.movieReducer);
 
   return (
-    <div className="library">
-      <div className="movies-list">
-        {movies.map((movie: any) => (
-          <div key={movie.id}>
-            <MovieCard data={movie} />
-          </div>
-        ))}
+    <>
+      <div className="library">
+        <ul className="movies-list">
+          {movies.map((movie: any) => (
+            <div key={movie.id}>
+              <MovieCard data={movie} />{' '}
+            </div>
+          ))}
+        </ul>
       </div>
-    </div>
+    </>
   );
 };

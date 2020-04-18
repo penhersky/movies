@@ -10,8 +10,8 @@ import Page404 from '../404';
 export default () => {
   return (
     <>
-      <Route path={['/', '/library', '/top']} component={Header} window={() => window} />
-      <Toolbar id="back-to-top-anchor" />
+      <Route path={['/', '/library', '/top']} component={Header} />
+      <Toolbar id="back-to-top-anchor" style={{ minHeight: 0 }} />
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/library" component={Library} />

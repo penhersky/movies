@@ -57,7 +57,6 @@ export default ({ data, className }: { data: any; className?: string }) => {
                   size="small"
                   name="half-rating-read"
                   defaultValue={data.rating}
-                  precision={0.1}
                   className="rating"
                   max={10}
                   readOnly

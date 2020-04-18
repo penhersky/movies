@@ -1,4 +1,26 @@
 @import '../../variables.scss';
 
 .main {
+  #parallax {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url(https://raw.githubusercontent.com/oscicen/oscicen.github.io/master/img/depth-3.png),
+      url(https://raw.githubusercontent.com/oscicen/oscicen.github.io/master/img/depth-2.png),
+      url(https://www.esa.int/extension/pillars/design/pillars/images/nebula.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: 50% 50%;
+  }
+  h1 {
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-family: 'Arial';
+    text-transform: uppercase;
+    opacity: 0.2;
+    font-size: 80px;
+  }
 }
