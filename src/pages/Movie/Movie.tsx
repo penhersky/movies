@@ -16,7 +16,7 @@ export default (props: any) => {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className="padding-top">
       <h1>{movies.openMovie.title}</h1>
     </div>
   );

@@ -14,8 +14,9 @@ export default () => {
     let depth2 = `${50 - (mouseX - w) * 0.02}% ${50 - (mouseY - h) * 0.02}%`;
     let depth3 = `${50 - (mouseX - w) * 0.04}% ${50 - (mouseY - h) * 0.06}%`;
     let x = `${depth3}, ${depth2}, ${depth1}`;
-
-    hat.current.style.backgroundPosition = x;
+    try {
+      hat.current.style.backgroundPosition = x;
+    } catch {}
   };
 
   document.addEventListener('mousemove', parallax);
