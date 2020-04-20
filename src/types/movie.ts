@@ -1,5 +1,8 @@
 export const GET_MOVIE = 'GET_MOVIE';
 export const GET_MOVIES = 'GET_MOVIES';
+export const SET_MOVIES = 'SET_MOVIES';
+
+export const SET_NEW_MOVIES = 'SET_NEW_MOVIES';
 
 export const ADD_TO_WILL_WATCH = 'ADD_TO_WILL_WATCH';
 export const SET_WILL_WATCH = 'SET_WILL_WATCH';

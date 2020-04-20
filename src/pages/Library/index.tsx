@@ -7,7 +7,8 @@ import './index.scss';
 
 const Movie = lazy(() => import('../../components/MovieCard/MovieCard'));
 
-export default (props: any) => {
+type Props = { newPage?: (page: number) => {}; activePage?: number; countPage?: number };
+export default (props: Props) => {
   const { movies } = useSelector((state: any) => state.movieReducer);
 
   return (

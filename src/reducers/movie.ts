@@ -1,10 +1,10 @@
-import { GET_MOVIE, Movie } from '../types/movie';
-
-import movie from '../temp';
+import { GET_MOVIE, SET_MOVIES, SET_NEW_MOVIES, Movie } from '../types/movie';
 
 type MovieAction = {
   type: string;
-  id: string;
+  id?: string;
+  movies?: Movie[];
+  newMovies?: Movie[];
 };
 
 type StateType = {
@@ -13,7 +13,8 @@ type StateType = {
 };
 
 export const initialState = {
-  movies: movie,
+  movies: [],
+  newMovies: [],
   openMovie: {
     id: '',
     views: 0,
@@ -36,6 +37,16 @@ export const movieReducer = (state: StateType = initialState, action: MovieActio
         openMovie: state.movies.find((value: any, index: number) =>
           value.id === action.id ? value : 0,
         ),
+      };
+    case SET_MOVIES:
+      return {
+        ...state,
+        movies: action.movies,
+      };
+    case SET_NEW_MOVIES:
+      return {
+        ...state,
+        newMovies: action.newMovies,
       };
     default:
       return state;
