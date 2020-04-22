@@ -11,10 +11,10 @@ import Auth from './modules/auth';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#9e9e9e',
+      main: '#00002e',
       light: '#a2a4ca',
       dark: '#494f5d',
-      contrastText: '#141414',
+      contrastText: '#546E7A',
     },
     secondary: {
       main: '#546e7a',
