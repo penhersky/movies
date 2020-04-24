@@ -24,4 +24,36 @@
     opacity: 0.2;
     font-size: 80px;
   }
+  .main-body {
+    display: flex;
+    justify-content: center;
+    height: 1000px;
+    .main-new-movies {
+      margin: 50px 10px;
+      height: 520px;
+      display: grid;
+      grid-template-columns: 60px 1fr 60px;
+      .new-movies-list {
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+
+        .card {
+          display: inline-block;
+        }
+      }
+      .arrow {
+        color: $global-link-hover-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .right {
+        right: 10px;
+      }
+      .left {
+        left: 10px;
+      }
+    }
+  }
 }

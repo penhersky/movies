@@ -3268,7 +3268,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.6:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -8257,6 +8257,13 @@ param-case@^3.0.3:
     dot-case "^3.0.3"
     tslib "^1.10.0"
 
+params@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/params/-/params-0.1.1.tgz#8b4864aa7e505575209ba32f94b04da493a10234"
+  integrity sha1-i0hkqn5QVXUgm6MvlLBNpJOhAjQ=
+  dependencies:
+    type-detect "~0.1.2"
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -9338,7 +9345,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9549,6 +9556,13 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-easy-swipe@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/react-easy-swipe/-/react-easy-swipe-0.0.18.tgz#3f52a05dbe3f8817bb8db94e743f6d966bbe89aa"
+  integrity sha512-IddCZANbT0qVbGFEihfWOkZb/rFpeA3VV87SNOOqPzmSZ93G0nDSyHD28zuGhYJilwEP33MqYv/dwo+zaZha3Q==
+  dependencies:
+    prop-types "^15.5.8"
+
 react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
@@ -9579,6 +9593,15 @@ react-redux@^7.2.0:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.9.0"
+
+react-responsive-carousel@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.2.4.tgz#06b2bbb0824878cb9883b9902f3c178262ee7da3"
+  integrity sha512-lJdXaJj2V9sSD7LjGDHpKT4M9Rg6grUHsSNBB0nRUz8hqCDXeoSmxM7OhlXhLY7D98N0DlI/e9BPpmgYc8KiMQ==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.5.8"
+    react-easy-swipe "^0.0.18"
 
 react-router-dom@^5.1.2:
   version "5.1.2"
@@ -10143,6 +10166,14 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
+roundabout@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/roundabout/-/roundabout-0.2.0.tgz#8e97797e3d360c85b1a63c1ce162dc1b6212047d"
+  integrity sha1-jpd5fj02DIWxpjwc4WLcG2ISBH0=
+  dependencies:
+    params "^0.1.0"
+    sherlock "*"
+
 rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
@@ -10452,6 +10483,11 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+
+sherlock@*:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/sherlock/-/sherlock-1.1.0.tgz#6a91c8445113c66af38e04683b4e66193b6d30a9"
+  integrity sha1-apHIRFETxmrzjgRoO05mGTttMKk=
 
 side-channel@^1.0.2:
   version "1.0.2"
@@ -11268,6 +11304,11 @@ type-check@~0.3.2:
   integrity sha1-WITKtRLPHTVeP7eE8wgEsrUg23I=
   dependencies:
     prelude-ls "~1.1.2"
+
+type-detect@~0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-0.1.2.tgz#c88e853e54e5abd88f1bf3194b477c853c94f854"
+  integrity sha1-yI6FPlTlq9iPG/MZS0d8hTyU+FQ=
 
 type-fest@^0.11.0:
   version "0.11.0"
