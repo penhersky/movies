@@ -12,22 +12,23 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
-  h1 {
-    position: absolute;
-    top: 47%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-family: 'Arial';
-    text-transform: uppercase;
-    opacity: 0.2;
-    font-size: 80px;
+    h1 {
+      position: absolute;
+      top: 47%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-family: 'Arial';
+      text-transform: uppercase;
+      opacity: 0.2;
+      font-size: 80px;
+    }
   }
   .main-body {
     display: flex;
     justify-content: center;
-    height: 1000px;
+    flex-flow: wrap column;
+
     .main-new-movies {
       margin: 50px 10px;
       height: 520px;
@@ -53,6 +54,18 @@
       }
       .left {
         left: 10px;
+      }
+    }
+    .body-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $global-title-color;
+      margin: 50px 10px;
+      text-align: center;
+      #main-text {
+        flex-flow: wrap column;
+        width: 90%;
       }
     }
   }
