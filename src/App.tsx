@@ -11,7 +11,7 @@ import Auth from './modules/auth';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#00002e',
+      main: '#03031d',
       light: '#a2a4ca',
       dark: '#494f5d',
       contrastText: '#546E7A',

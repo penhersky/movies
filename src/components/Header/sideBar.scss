@@ -2,57 +2,15 @@
 
 .side-bar {
   .side-content {
-    background-color: #00002e;
     display: flex;
     flex-flow: nowrap row;
     justify-content: space-between;
-    height: 100%;
     margin: 0 10px;
-    #logo {
-      display: flex;
-      text-align: center;
-      align-items: center;
-      margin: 0;
-    }
+  }
+}
 
-    #side-list {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-      .side-item {
-        list-style: none;
-        height: 100%;
-        cursor: pointer;
-        .side-item-card {
-          height: 100%;
-          font-size: 16px;
-          .side-link {
-            display: flex;
-            justify-content: center;
-            height: 100%;
-            width: 70px;
-            align-items: center;
-            text-decoration: none;
-            color: #546e7a;
-          }
-        }
-      }
-      .active {
-        font-size: 20px;
-        border-bottom: solid 1px $global-revers-color;
-      }
-    }
-    .right-side {
-      display: flex;
-      flex-flow: row wrap;
-    }
-  }
-  .user-link {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-  }
+.side-link {
+  text-decoration: none;
+  color: $global-tab-color;
+  text-transform: uppercase;
 }
