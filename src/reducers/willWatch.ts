@@ -14,7 +14,7 @@ type WillWatchAction = {
   listWillWatch?: WillWatch[];
 };
 
-type WillWatch = {
+export type WillWatch = {
   id: string;
   title: string;
   poster: string;

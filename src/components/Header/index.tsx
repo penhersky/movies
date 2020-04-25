@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import {
@@ -19,8 +20,9 @@ import Slide from '@material-ui/core/Slide';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { Home, VideoLibrary, Stars } from '@material-ui/icons';
+
+import { WillWatchList } from '../';
 
 import useStyles from './styles';
 
@@ -45,7 +47,9 @@ function HideOnScroll(props: Props) {
 export default (props: { user?: any; window?: () => Window }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const { willWatch } = useSelector((state: any) => state.willWatchReducer);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -148,7 +152,7 @@ export default (props: { user?: any; window?: () => Window }) => {
           </NavLink>
         </List>
         <Divider />
-        Will Watch
+        <WillWatchList WillWatch={willWatch} />
       </Drawer>
     </>
   );

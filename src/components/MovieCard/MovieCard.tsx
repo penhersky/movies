@@ -27,7 +27,7 @@ export default ({ data, className }: { data: any; className?: string }) => {
     });
     enqueueSnackbar(`Movie "${data.title}" added to Will watch`, {
       variant: 'success',
-      anchorOrigin: { vertical: 'top', horizontal: 'left' },
+      anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
     });
   }, [enqueueSnackbar, dispatch, data]);
 
