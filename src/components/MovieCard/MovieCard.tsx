@@ -26,7 +26,6 @@ export default ({ data, className }: { data: any; className?: string }) => {
       realizeData: data.realizeData,
     });
     enqueueSnackbar(`Movie "${data.title}" added to Will watch`, {
-      variant: 'success',
       anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
     });
   }, [enqueueSnackbar, dispatch, data]);

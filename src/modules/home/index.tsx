@@ -28,7 +28,7 @@ export default () => {
       <Toolbar id="back-to-top-anchor" style={{ minHeight: 0 }} />
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route exact path="/library" component={() => <Library />} />
+        <Route exact path={'/library/:page'} component={() => <Library />} />
         <Route exact path="/library/movie/:id" component={MoviePage} />
         <Route path="*" component={Page404} />
       </Switch>

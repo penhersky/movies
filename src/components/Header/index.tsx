@@ -134,7 +134,7 @@ export default (props: { user?: any; window?: () => Window }) => {
               <ListItemText primary={'main'} />
             </ListItem>
           </NavLink>
-          <NavLink exact to="/library" className="side-link">
+          <NavLink exact to="/library/1" className="side-link">
             <ListItem button>
               <ListItemIcon>
                 <VideoLibrary color="secondary" />
