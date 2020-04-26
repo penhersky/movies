@@ -1,13 +1,18 @@
 import React, { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Loading } from '../../components';
+import { Loading, Pagination } from '../../components';
 
 import './index.scss';
 
 const Movie = lazy(() => import('../../components/MovieCard/MovieCard'));
 
-type Props = { newPage?: (page: number) => {}; activePage?: number; countPage?: number };
+type Props = {
+  newPage: (page: number) => void;
+  activePage?: number;
+  countPage?: number;
+};
+
 export default (props: Props) => {
   const { movies } = useSelector((state: any) => state.movieReducer);
 
@@ -17,11 +22,12 @@ export default (props: Props) => {
         <ul className="movies-list">
           {movies.map((movie: any) => (
             <div key={movie.id}>
-              <Movie data={movie} />{' '}
+              <Movie data={movie} />
             </div>
           ))}
         </ul>
       </div>
+      <Pagination {...props} />
     </Suspense>
   );
 };

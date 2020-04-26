@@ -1,0 +1,21 @@
+@import '../../variables.scss';
+
+.pagination-blok {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+
+  .pagination {
+    ul {
+      li {
+        button {
+          color: $global-tab-color;
+        }
+      }
+    }
+    .Mui-selected {
+      color: $global-color;
+    }
+  }
+}
