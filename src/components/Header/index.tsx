@@ -108,7 +108,6 @@ export default (props: { user?: any; window?: () => Window }) => {
       <Drawer
         className={classes.drawer}
         variant="persistent"
-        id="side-bar"
         anchor="left"
         open={open}
         classes={{

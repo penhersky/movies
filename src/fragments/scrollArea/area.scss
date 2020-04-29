@@ -1,12 +1,11 @@
-@import './variables.scss';
+@import '../../variables.scss';
 
-body {
+.scroll-area {
+  overflow-y: auto;
   margin: 0;
   padding: 0;
-  background-color: $global-background;
-
   &::-webkit-scrollbar {
-    width: 1em;
+    width: 0.6em;
   }
 
   &::-webkit-scrollbar-track {
@@ -17,6 +16,6 @@ body {
   &::-webkit-scrollbar-thumb {
     background-color: $scroll-bar-color;
     outline: 1px solid $global-primary-background;
-    border-radius: 30px;
+    border-radius: 70px;
   }
 }

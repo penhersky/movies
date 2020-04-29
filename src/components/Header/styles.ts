@@ -11,6 +11,7 @@ export default makeStyles((theme: Theme) =>
     drawerPaper: {
       width: drawerWidth,
       backgroundColor: '#333341',
+      overflowY: 'hidden',
     },
     drawerHeader: {
       display: 'flex',
