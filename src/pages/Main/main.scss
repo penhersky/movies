@@ -35,7 +35,7 @@
       display: grid;
       grid-template-columns: 60px 1fr 60px;
       .new-movies-list {
-        overflow-x: auto;
+        overflow-x: hidden;
         overflow-y: hidden;
         white-space: nowrap;
 

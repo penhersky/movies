@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
@@ -9,7 +9,7 @@ import './main.scss';
 
 export default () => {
   const { newMovies } = useSelector((state: any) => state.movieReducer);
-  console.log(newMovies);
+  const scroll = useRef<HTMLDivElement>(document.createElement('div'));
 
   return (
     <div className="main">
