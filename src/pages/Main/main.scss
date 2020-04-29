@@ -32,17 +32,8 @@
     .main-new-movies {
       margin: 50px 10px;
       height: 520px;
-      display: grid;
-      grid-template-columns: 60px 1fr 60px;
-      .new-movies-list {
-        overflow-x: hidden;
-        overflow-y: hidden;
-        white-space: nowrap;
-
-        .card {
-          display: inline-block;
-        }
-      }
+      display: flex;
+      justify-content: center;
       .arrow {
         color: $global-link-hover-color;
         display: flex;

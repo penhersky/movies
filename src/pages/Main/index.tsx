@@ -1,15 +1,14 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 
-import { MovieCard } from '../../components';
+import { MovieCard, Slick } from '../../components';
 
 import './main.scss';
 
 export default () => {
   const { newMovies } = useSelector((state: any) => state.movieReducer);
-  const scroll = useRef<HTMLDivElement>(document.createElement('div'));
 
   return (
     <div className="main">
@@ -18,20 +17,15 @@ export default () => {
       </div>
       <div className="main-body">
         <div className="main-new-movies">
-          <div className="arrow left">
-            <ChevronLeft style={{ fontSize: '80px' }} />
-          </div>
-          <div className="new-movies-list">
+          <Slick>
             {newMovies.map((movie: any) => (
               <div className="card" key={movie.id}>
                 <MovieCard data={movie} />
               </div>
             ))}
-          </div>
-          <div className="arrow right">
-            <ChevronRight style={{ fontSize: '80px' }} />
-          </div>
+          </Slick>
         </div>
+
         <div className="body-text">
           <div id="main-text">
             <h1>Terms of use</h1>
