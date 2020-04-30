@@ -2,6 +2,9 @@ import React, { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Loading, Pagination } from '../../components';
+import { Parallax } from '../../fragments';
+
+import hatImag1 from '../../image/library_image_1.jpg';
 
 import './index.scss';
 
@@ -15,19 +18,23 @@ type Props = {
 
 export default (props: Props) => {
   const { movies } = useSelector((state: any) => state.movieReducer);
-
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="library padding-top">
-        <ul className="movies-list">
-          {movies.map((movie: any) => (
-            <div key={movie.id}>
-              <Movie data={movie} />
-            </div>
-          ))}
-        </ul>
+    <>
+      <div>
+        <Parallax img={hatImag1} title="Library" />
       </div>
-      <Pagination {...props} />
-    </Suspense>
+      <Suspense fallback={<Loading />}>
+        <div className="library">
+          <ul className="movies-list">
+            {movies.map((movie: any) => (
+              <div key={movie.id}>
+                <Movie data={movie} />
+              </div>
+            ))}
+          </ul>
+        </div>
+        <Pagination {...props} />
+      </Suspense>
+    </>
   );
 };

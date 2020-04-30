@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { ChevronLeft, ChevronRight } from '@material-ui/icons';
-
 import { MovieCard, Slick } from '../../components';
 
 import './main.scss';
