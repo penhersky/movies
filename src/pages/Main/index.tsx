@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { MovieCard, Slick } from '../../components';
@@ -8,10 +8,29 @@ import './main.scss';
 export default () => {
   const { newMovies } = useSelector((state: any) => state.movieReducer);
 
+  const scroll = useRef<HTMLDivElement>(document.createElement('div'));
+  const title = useRef<HTMLHeadingElement>(document.createElement('h1'));
+
+  document.addEventListener('scroll', () => {
+    try {
+      const scrollY = window.scrollY;
+      if (scrollY !== 0) {
+        title.current.style.display = 'none';
+        scroll.current.style.backgroundPosition = `calc(50% + ${scrollY}px) calc(50% + ${scrollY}px)`;
+      } else {
+        scroll.current.style.backgroundPosition = '';
+        title.current.style.display = 'initial';
+      }
+    } catch {}
+  });
+
   return (
     <div className="main">
-      <div id="parallax">
-        <h1>Movies</h1>
+      <h1 id="main-hat-title" ref={title}>
+        Movies
+      </h1>
+      <div id="parallax" ref={scroll}>
+        <span>Movies</span>
       </div>
       <div className="main-body">
         <div className="main-new-movies">

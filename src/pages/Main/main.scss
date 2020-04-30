@@ -6,23 +6,41 @@
     width: 100%;
     height: 100vh;
     background-image: url(../../image/spase2.jpg);
-    box-sizing: border-box;
-    transform-style: inherit;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
     background-size: cover;
-    h1 {
+    background-position: 50% 50%;
+    background-clip: text;
+    font-weight: bold;
+    font-size: 25rem;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &:before {
+      content: '';
+      background-image: inherit;
+      background-size: cover;
+      background-position: 50% 50%;
       position: absolute;
-      top: 47%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-family: 'Arial';
-      text-transform: uppercase;
-      opacity: 0.2;
-      font-size: 80px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -2;
     }
+  }
+  #main-hat-title {
+    position: absolute;
+    color: #fff;
+    font-family: 'Arial';
+    text-transform: uppercase;
+    opacity: 0.2;
+    font-size: 90px;
+    text-align: center;
+    width: 100%;
+    margin-top: 20vh;
   }
   .main-body {
     display: flex;
@@ -62,6 +80,14 @@
         flex-flow: wrap column;
         width: 90%;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 712px) {
+  .main {
+    #parallax {
+      font-size: 12rem;
     }
   }
 }
