@@ -15,6 +15,9 @@ export default () => {
       </div>
       <div className="main-body">
         <div className="main-new-movies">
+          <div className="new-movies-title">
+            <h3>New</h3>
+          </div>
           <Slick>
             {newMovies.map((movie: any) => (
               <div className="card" key={movie.id}>

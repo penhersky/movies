@@ -16,3 +16,7 @@ $global-primary-border: #000e66;
 
 $global-link-hover-color: #c4d0ff;
 $global-link-color: #161616;
+
+@function linerGradient($left, $center, $right) {
+  @return linear-gradient(90deg, $left 11%, $center 51%, $right 88%);
+}

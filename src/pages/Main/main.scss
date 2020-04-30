@@ -30,21 +30,25 @@
     flex-flow: wrap column;
 
     .main-new-movies {
-      margin: 50px 10px;
-      height: 520px;
+      margin: 50px 0px;
+      height: 555px;
       display: flex;
       justify-content: center;
-      .arrow {
-        color: $global-link-hover-color;
+      flex-flow: wrap row;
+      background: linerGradient(#ff000000, #ff0000ba, #ff000000);
+      .new-movies-title {
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-      .right {
-        right: 10px;
-      }
-      .left {
-        left: 10px;
+        background: linerGradient(#ff000000, #ff0000ba, #ff000000);
+
+        h3 {
+          font-size: 30px;
+          margin: 0;
+          font-family: Roboto;
+          color: rgba(255, 217, 0, 0.842);
+        }
       }
     }
     .body-text {
