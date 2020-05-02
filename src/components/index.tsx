@@ -5,3 +5,4 @@ export { default as Loading } from './Loading/Loading';
 export { default as WillWatchList } from './WillWatchList/WillWatch';
 export { default as Pagination } from './Pagination/Pagination';
 export { default as Slick } from './Slick/Slick';
+export { default as SortPanel } from './sortPanel/SortPanel';

@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+
+.sort-panel {
+  background-color: $global-primary-background;
+  border-radius: 3px;
+  height: 70px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap row;
+}
