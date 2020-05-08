@@ -1,10 +1,7 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import URL from './untils/api';
 
-export const useFetch = (
-  initialUrl: String,
-  sendData = {},
-  initialReturnData = {},
-): [{}, Boolean, Boolean, Dispatch<SetStateAction<String>>] => {
+export const useFetch = (initialUrl: String, initialReturnData = {}): any => {
   const [data, setData] = useState(initialReturnData);
   const [url, setUrl] = useState(initialUrl);
   const [loading, setLoading] = useState(false);
@@ -14,18 +11,12 @@ export const useFetch = (
     const fetchData = async () => {
       setError(false);
       setLoading(true);
-
       try {
-        const result = await fetch(`${process.env.SERVER_URL}/${url}`, {
-          headers: {
-            'auth-token': String(localStorage.getItem('token')),
-          },
+        const result = await fetch(`${URL}${url}`, {
           method: 'GET',
-          body: JSON.stringify(sendData),
-          mode: 'cors',
         }).then((response) => response.json());
 
-        setData(result.data);
+        setData(result);
       } catch (error) {
         setError(true);
       }
@@ -34,7 +25,7 @@ export const useFetch = (
     };
 
     fetchData();
-  }, [url, sendData]);
+  }, [url]);
 
   return [data, loading, error, setUrl];
 };
@@ -59,10 +50,7 @@ export const useLazyFetch = (
     setError(false);
     setLoading(true);
 
-    fetch(`${process.env.SERVER_URL}/${url}`, {
-      headers: {
-        'auth-token': String(localStorage.getItem('token')),
-      },
+    fetch(`${URL}/${url}`, {
       method,
       body: JSON.stringify({ ...sendData, ...data }),
       mode: 'cors',
