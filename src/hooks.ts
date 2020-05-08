@@ -1,5 +1,5 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import URL from './untils/api';
+import URL from './utils/api';
 
 export const useFetch = (initialUrl: String, initialReturnData = {}): any => {
   const [data, setData] = useState(initialReturnData);

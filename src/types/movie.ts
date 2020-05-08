@@ -10,14 +10,18 @@ export const DELETE_FROM_WILL_WATCH = 'DELETE_FROM_WILL_WATCH';
 export const SET_TOP100_MOVIES = 'SET_TOP100_MOVIES';
 
 export type Movie = {
-  id: string;
-  views: number;
-  title: string;
-  movies: string;
-  realizeData: string;
-  poster: string;
+  id: number;
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  original_language: string;
+  original_title: string;
   overview: string;
-  originalLanguage: string;
-  backgroundPath: string;
-  rating: number;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
 };

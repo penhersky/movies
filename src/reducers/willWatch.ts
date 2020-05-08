@@ -8,18 +8,18 @@ type WillWatchAction = {
   type: string;
   id: string;
   title?: string;
-  poster?: string;
-  rating?: number;
-  realizeData?: string;
+  poster_path?: string;
+  vote_average?: number;
+  release_date?: string;
   listWillWatch?: WillWatch[];
 };
 
 export type WillWatch = {
   id: string;
   title: string;
-  poster: string;
-  rating: number;
-  realizeData: string;
+  poster_path: string;
+  vote_average: number;
+  release_date: string;
 };
 
 type StateType = {
@@ -42,9 +42,9 @@ export const willWatchReducer = (
           {
             id: action.id,
             title: action.title,
-            poster: action.poster,
-            rating: action.rating,
-            realizeData: action.realizeData,
+            poster: action.poster_path,
+            rating: action.vote_average,
+            realizeData: action.vote_average,
           },
         ],
       };

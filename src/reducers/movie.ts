@@ -25,20 +25,27 @@ export const initialState = {
   topMovies: [],
   newMovies: [],
   openMovie: {
-    id: '',
-    views: 0,
-    title: '',
-    movies: '',
-    realizeData: '',
-    poster: '',
+    id: 0,
+    adult: false,
+    backdrop_path: '',
+    genre_ids: [],
+    original_language: '',
+    original_title: '',
     overview: '',
-    originalLanguage: '',
-    backgroundPath: '',
-    rating: 0,
+    popularity: 0,
+    poster_path: '',
+    release_date: '',
+    title: '',
+    video: false,
+    vote_average: 0,
+    vote_count: 0,
   },
 };
 
-export const movieReducer = (state: StateType = initialState, action: MovieAction) => {
+export const movieReducer = (
+  state: StateType = initialState,
+  action: MovieAction,
+) => {
   switch (action.type) {
     case GET_MOVIE:
       return {
@@ -46,7 +53,9 @@ export const movieReducer = (state: StateType = initialState, action: MovieActio
         openMovie: [
           ...state.movies,
           ...state.topMovies,
-        ].find((value: any, index: number) => (value.id === action.id ? value : 0)),
+        ].find((value: any, index: number) =>
+          value.id === action.id ? value : 0,
+        ),
       };
     case SET_MOVIES:
       return {
