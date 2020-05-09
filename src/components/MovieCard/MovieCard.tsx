@@ -57,7 +57,11 @@ export default ({ data, className }: { data: any; className?: string }) => {
               />
             </div>
             <div className="card-inf">
-              <h2>{data.title}</h2>
+              <h2
+                style={{ fontSize: String(data.title).length > 26 ? 18 : 21 }}
+              >
+                {data.title}
+              </h2>
               <div className="card-data">
                 <Rating
                   size="small"

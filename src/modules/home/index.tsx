@@ -16,7 +16,7 @@ import {
   SET_TOP100_MOVIES,
 } from '../../types/movie';
 
-import { API_KEY } from '../../utils/api';
+import { defaultLibrary } from '../../utils/createUrl';
 
 import Movies from '../../temp';
 
@@ -32,37 +32,37 @@ export default () => {
   const [pages, setPages] = useState({ countPage: 50, activePage: 1 });
   const [TopPages, setTopPages] = useState({ countPage: 5, activePage: 1 });
   const [movies, setMovies] = useState([]);
+  const [newMovies, setNewMovies] = useState([]);
   const dispatch = useDispatch();
   /*
     useQuery()
   */
+  //  *library
   const [data, loading, error, setURL] = useFetch(
-    `now_playing?api_key=${API_KEY}&language=en-US&page=${pages.activePage}`,
+    defaultLibrary(pages.activePage),
     initialState,
   );
 
   useEffect(() => {
-    console.log(data, error);
     if (data) {
       setPages((state) => ({
         countPage: data.total_pages,
         activePage: state.activePage,
       }));
       setMovies(data.results);
+      setNewMovies(data.results.slice(0, 10));
     }
   }, [data, error]);
 
   useEffect(() => {
-    setURL(
-      `now_playing?api_key=${API_KEY}&language=en-US&page=${pages.activePage}`,
-    );
+    setURL(defaultLibrary(pages.activePage));
   }, [pages, setURL]);
 
   useEffect(() => {
     dispatch({ type: SET_MOVIES, movies: movies });
     dispatch({ type: SET_TOP100_MOVIES, topMovies: Movies });
-    dispatch({ type: SET_NEW_MOVIES, newMovies: movies.slice(0, 10) });
-  }, [dispatch, movies]);
+    dispatch({ type: SET_NEW_MOVIES, newMovies });
+  }, [dispatch, movies, newMovies]);
 
   // Library
   const getPage = (page: number) => {
