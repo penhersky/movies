@@ -14,6 +14,7 @@ type Props = {
   newPage: (page: number) => void;
   activePage?: number;
   countPage?: number;
+  error?: boolean;
 };
 
 export default (props: Props) => {
