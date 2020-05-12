@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Parallax } from '../../fragments';
+import { Parallax, Message } from '../../fragments';
 
 import img from '../../image/space-top.jpg';
 import { Loading, Pagination, MovieCard as Movie } from '../../components';
@@ -22,11 +22,20 @@ export default (props: Props) => {
       <Suspense fallback={<Loading />}>
         <div className="library">
           <ul className="movies-list">
-            {topMovies.map((movie: any) => (
-              <div key={movie.id}>
-                <Movie data={movie} />
-              </div>
-            ))}
+            {props.error ? (
+              <Message
+                title="Load movie list error!"
+                type="error"
+                body="Please reload this page."
+                style={{ height: '50vh' }}
+              />
+            ) : (
+              topMovies.map((movie: any) => (
+                <div key={movie.id}>
+                  <Movie data={movie} />
+                </div>
+              ))
+            )}
           </ul>
         </div>
         <Pagination {...props} />

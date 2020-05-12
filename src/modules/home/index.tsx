@@ -68,7 +68,7 @@ export default () => {
   // top /*
   useEffect(() => {
     if (topData) {
-      setPages((state) => ({
+      setTopPages((state) => ({
         countPage: 5,
         activePage: state.activePage,
       }));

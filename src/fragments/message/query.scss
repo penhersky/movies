@@ -1,0 +1,31 @@
+@import '../../variables.scss';
+
+.load-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap column;
+  .message-content {
+    text-align: center;
+  }
+}
+
+.message-title {
+  font-size: 20px;
+  color: $global-revers-color;
+}
+.message-body {
+  font-size: 14px;
+  margin: 5px 0;
+  color: $global-tab-color;
+}
+
+.error-message {
+  color: $global-error-color;
+}
+.warning-message {
+  color: $global-warning-color;
+}
+.info-message {
+  color: $global-info-color;
+}

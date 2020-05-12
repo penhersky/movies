@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Loading, Pagination } from '../../components';
-import { Parallax } from '../../fragments';
+import { Parallax, Message } from '../../fragments';
 
 import hatImag1 from '../../image/library_image_1.jpg';
 
@@ -26,13 +26,22 @@ export default (props: Props) => {
       </div>
       <Suspense fallback={<Loading />}>
         <div className="library">
-          <ul className="movies-list">
-            {movies.map((movie: any) => (
-              <div key={movie.id}>
-                <Movie data={movie} />
-              </div>
-            ))}
-          </ul>
+          {props.error ? (
+            <Message
+              title="Load movie list error!"
+              type="error"
+              body="Please reload this page."
+              style={{ height: '50vh' }}
+            />
+          ) : (
+            <ul className="movies-list">
+              {movies.map((movie: any) => (
+                <div key={movie.id}>
+                  <Movie data={movie} />
+                </div>
+              ))}
+            </ul>
+          )}
         </div>
         <Pagination {...props} />
       </Suspense>
