@@ -2,8 +2,24 @@
   padding: 0 50px;
   margin: 0;
   max-width: 80vw;
-  .slick-body {
-    min-width: 100%;
-    min-height: 100%;
-  }
+}
+
+.swiper-container {
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 50px;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 500px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
 }

@@ -54,6 +54,10 @@
       justify-content: center;
       flex-flow: wrap row;
       background: linerGradient(#ff000000, #ff0000ba, #ff000000);
+      .card {
+        height: 500px;
+        margin: 0 5px;
+      }
       .new-movies-title {
         width: 100%;
         display: flex;

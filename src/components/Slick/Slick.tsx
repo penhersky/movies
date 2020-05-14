@@ -1,32 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import React from 'react';
+import Swiper from 'react-id-swiper';
+import 'swiper/css/swiper.min.css';
 
 import './slick.scss';
 
 export default ({ children }: { children?: any[] }) => {
-  const [count, setCount] = useState(4);
-  const width = window.innerWidth;
-  useEffect(() => {
-    if (width < 700) setCount(1);
-    else setCount(4);
-  }, [width, setCount]);
-  const settings = {
-    infinite: true,
-    speed: 1000,
-    slidesToShow: count,
-    slidesToScroll: count,
-    autoplay: true,
-    variableWidth: true,
-    adaptiveHeight: true,
+  const params = {
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    slidesPerView: 'auto',
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    spaceBetween: 1,
+    slidesPerGroup: 1,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: true,
+    },
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      hide: true,
+    },
   };
+
   return (
     <div className="slick">
-      <Slider {...settings} className="slick-body">
-        {children}
-      </Slider>
+      <Swiper {...params}>{children}</Swiper>
     </div>
   );
 };
