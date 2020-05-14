@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Loading, Pagination } from '../../components';
 import { Parallax, Message } from '../../fragments';
 
-import hatImag1 from '../../image/library_image_1.jpg';
+import image from '../../image/library.jpg';
 
 import './index.scss';
 
@@ -22,7 +22,7 @@ export default (props: Props) => {
   return (
     <>
       <div>
-        <Parallax img={hatImag1} title="Library" />
+        <Parallax img={image} title="Library" opacity={0.5} />
       </div>
       <Suspense fallback={<Loading />}>
         <div className="library">

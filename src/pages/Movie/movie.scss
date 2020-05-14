@@ -1,0 +1,75 @@
+@import '../../variables.scss';
+
+.movie-page {
+  display: flex;
+  justify-content: center;
+  .movie-container {
+    max-width: 75vw;
+    display: flex;
+    align-items: center;
+    flex-flow: wrap column;
+    .movie-page-title {
+      text-align: center;
+      color: $global-title-color;
+      margin: 15px;
+      font-size: 35px;
+    }
+    .movie-rating {
+      margin-bottom: 20px;
+    }
+    .movie-detail-data {
+      display: flex;
+      flex-flow: wrap row;
+      color: $global-tab-color;
+      justify-content: center;
+      background: linerGradient(
+        $global-background,
+        $global-color,
+        $global-background
+      );
+      .movie-page-poster {
+        height: 500px;
+      }
+      .movie-detail {
+        max-width: 650px;
+        min-width: 500px;
+        display: flex;
+        flex-flow: wrap column;
+        padding: 5px 20px;
+        .movie-detail-tem {
+          max-width: 699px;
+          p {
+            margin: 11px 0;
+          }
+        }
+      }
+    }
+    margin: 30px 10px 50px 10px;
+    .overview {
+      h3 {
+        text-align: center;
+        color: $global-title-color;
+      }
+      p {
+        color: $global-tab-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .movie-detail {
+    justify-content: center;
+  }
+}
+@media screen and (min-width: 700px) {
+  .movie-page {
+    .movie-container {
+      .movie-detail-data {
+        .movie-detail {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+}

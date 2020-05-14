@@ -72,7 +72,6 @@ export default () => {
         countPage: 5,
         activePage: state.activePage,
       }));
-      console.log(topData);
       dispatch({ type: SET_TOP100_MOVIES, topMovies: topData.results });
     }
   }, [dispatch, topData]);

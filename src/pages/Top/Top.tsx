@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { Parallax, Message } from '../../fragments';
 
-import img from '../../image/space-top.jpg';
+import img from '../../image/top.jpg';
 import { Loading, Pagination, MovieCard as Movie } from '../../components';
 
 type Props = {
@@ -18,7 +18,7 @@ export default (props: Props) => {
 
   return (
     <div className="top-movies">
-      <Parallax title="top 100 movies" img={img} opacity={0.8} />
+      <Parallax title="top 100 movies" img={img} opacity={0.6} />
       <Suspense fallback={<Loading />}>
         <div className="library">
           <ul className="movies-list">
