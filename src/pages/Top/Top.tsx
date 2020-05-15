@@ -14,6 +14,7 @@ type Props = {
 };
 
 export default (props: Props) => {
+  document.title = `Space movies/TOP/${props.activePage}`;
   const { topMovies } = useSelector((state: any) => state.movieReducer);
 
   return (

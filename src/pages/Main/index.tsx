@@ -2,10 +2,12 @@ import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { MovieCard, Slick } from '../../components';
+import { Message } from '../../fragments';
 
 import './main.scss';
 
-export default () => {
+export default (props: { loading: boolean; error: boolean }) => {
+  document.title = 'Space movies/Main';
   const { newMovies } = useSelector((state: any) => state.movieReducer);
 
   const scroll = useRef<HTMLDivElement>(document.createElement('div'));
@@ -27,7 +29,7 @@ export default () => {
   return (
     <div className="main">
       <h1 id="main-hat-title" ref={title}>
-        Movies
+        Space
       </h1>
       <div id="parallax" ref={scroll}>
         <span>Movies</span>
@@ -37,13 +39,24 @@ export default () => {
           <div className="new-movies-title">
             <h3>New</h3>
           </div>
-          <Slick>
-            {newMovies.map((movie: any) => (
-              <span className="card wiper-slide" key={movie.id}>
-                <MovieCard data={movie} />
-              </span>
-            ))}
-          </Slick>
+          {props.error ? (
+            <Message
+              title="Load movie list error!"
+              body="Please reload this page."
+              type="warning"
+              style={{ width: '100%', height: '100%' }}
+            />
+          ) : (
+            <Slick>
+              {props.loading
+                ? []
+                : newMovies.map((movie: any) => (
+                    <span className="card wiper-slide" key={movie.id}>
+                      <MovieCard data={movie} />
+                    </span>
+                  ))}
+            </Slick>
+          )}
         </div>
 
         <div className="body-text">

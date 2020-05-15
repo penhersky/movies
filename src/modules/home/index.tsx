@@ -43,15 +43,19 @@ export default () => {
 
   // library /*
   useEffect(() => {
-    if (data) {
-      setPages((state) => ({
-        countPage: data.total_pages,
-        activePage: state.activePage,
-      }));
-      dispatch({ type: SET_MOVIES, movies: data.results });
-      dispatch({ type: SET_NEW_MOVIES, newMovies: data.results.slice(0, 10) });
+    if (!data) return;
+    setPages((state) => ({
+      countPage: data.total_pages,
+      activePage: state.activePage,
+    }));
+    dispatch({ type: SET_MOVIES, movies: data.results });
+    if (pages.activePage === 1) {
+      dispatch({
+        type: SET_NEW_MOVIES,
+        newMovies: data.results.slice(0, 10),
+      });
     }
-  }, [dispatch, data]);
+  }, [dispatch, data, pages.activePage]);
 
   useEffect(() => {
     setURL(defaultLibrary(pages.activePage));
@@ -94,7 +98,13 @@ export default () => {
       {loading || topLoading ? <Loading /> : null}
       <Toolbar id="back-to-top-anchor" style={{ minHeight: 0 }} />
       <Switch>
-        <Route exact path="/" component={Main} />
+        <Route
+          exact
+          path="/"
+          component={() => (
+            <Main loading={loading || topLoading} error={error} />
+          )}
+        />
         <Route
           exact
           path={'/library'}

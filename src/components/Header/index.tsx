@@ -44,7 +44,7 @@ function HideOnScroll(props: Props) {
   );
 }
 
-export default (props: { user?: any; window?: () => Window }) => {
+export default (props: { window?: () => Window }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
