@@ -9,6 +9,8 @@ export const DELETE_FROM_WILL_WATCH = 'DELETE_FROM_WILL_WATCH';
 
 export const SET_TOP100_MOVIES = 'SET_TOP100_MOVIES';
 
+export const SET_SEARCH_MOVIES = 'SET_SEARCH_MOVIES';
+
 export type Movie = {
   id: number;
   adult: boolean;

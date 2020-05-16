@@ -1,25 +1,26 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties } from "react";
 
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import WarningIcon from '@material-ui/icons/Warning';
-import InfoIcon from '@material-ui/icons/Info';
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import WarningIcon from "@material-ui/icons/Warning";
+import InfoIcon from "@material-ui/icons/Info";
 
-import './query.scss';
+import "./query.scss";
 
-type MsgType = 'error' | 'warning' | undefined;
+import { Message } from "../../types/Message";
+
 export default (props: {
   title: string;
   body?: string;
-  type?: MsgType;
+  type?: Message;
   style?: CSSProperties;
 }) => {
-  const icon = (type: MsgType) => {
+  const icon = (type: Message) => {
     switch (type) {
-      case 'warning':
+      case "warning":
         return (
           <WarningIcon className="warning-message" style={{ fontSize: 50 }} />
         );
-      case 'error':
+      case "error":
         return (
           <ErrorOutlineIcon
             className="error-message"

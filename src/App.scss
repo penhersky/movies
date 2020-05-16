@@ -10,6 +10,14 @@ h1 {
   font-family: 'Poppins', sans-serif;
 }
 
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  margin-bottom: 10px;
+}
+
 .padding-top {
   padding-top: 40px;
 }

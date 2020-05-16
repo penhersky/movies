@@ -1,27 +1,28 @@
-import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 
-import { MovieCard, Slick } from '../../components';
-import { Message } from '../../fragments';
+import { MovieCard, Slick } from "../../components";
+import { Message } from "../../fragments";
 
-import './main.scss';
+import "./main.scss";
 
 export default (props: { loading: boolean; error: boolean }) => {
-  document.title = 'Space movies/Main';
+  document.title = "Space movies | Main";
   const { newMovies } = useSelector((state: any) => state.movieReducer);
 
-  const scroll = useRef<HTMLDivElement>(document.createElement('div'));
-  const title = useRef<HTMLHeadingElement>(document.createElement('h1'));
+  const scroll = useRef<HTMLDivElement>(document.createElement("div"));
+  const title = useRef<HTMLHeadingElement>(document.createElement("h1"));
 
-  document.addEventListener('scroll', () => {
+  document.addEventListener("scroll", () => {
     try {
       const scrollY = window.scrollY;
       if (scrollY !== 0) {
-        title.current.style.display = 'none';
-        scroll.current.style.backgroundPosition = `calc(50% + ${scrollY}px) calc(50% + ${scrollY}px)`;
+        title.current.style.display = "none";
+        scroll.current.style.backgroundPosition =
+          `calc(50% + ${scrollY}px) calc(50% + ${scrollY}px)`;
       } else {
-        scroll.current.style.backgroundPosition = '';
-        title.current.style.display = 'initial';
+        scroll.current.style.backgroundPosition = "";
+        title.current.style.display = "initial";
       }
     } catch {}
   });
@@ -39,24 +40,24 @@ export default (props: { loading: boolean; error: boolean }) => {
           <div className="new-movies-title">
             <h3>New</h3>
           </div>
-          {props.error ? (
-            <Message
-              title="Load movie list error!"
-              body="Please reload this page."
-              type="warning"
-              style={{ width: '100%', height: '100%' }}
-            />
-          ) : (
-            <Slick>
-              {props.loading
-                ? []
-                : newMovies.map((movie: any) => (
-                    <span className="card wiper-slide" key={movie.id}>
-                      <MovieCard data={movie} />
-                    </span>
-                  ))}
-            </Slick>
-          )}
+          {props.error
+            ? (
+              <Message
+                title="Load movie list error!"
+                body="Please reload this page."
+                type="warning"
+                style={{ width: "100%", height: "100%" }}
+              />
+            )
+            : (
+              <Slick>
+                {props.loading ? [] : newMovies.map((movie: any) => (
+                  <span className="card wiper-slide" key={movie.id}>
+                    <MovieCard data={movie} />
+                  </span>
+                ))}
+              </Slick>
+            )}
         </div>
 
         <div className="body-text">

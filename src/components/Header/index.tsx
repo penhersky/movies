@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 import {
   IconButton,
   InputBase,
@@ -11,22 +11,22 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import { Menu } from '@material-ui/icons';
-import { useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Slide from '@material-ui/core/Slide';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Home, VideoLibrary, Stars } from '@material-ui/icons';
+} from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+import { Menu } from "@material-ui/icons";
+import { useTheme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Slide from "@material-ui/core/Slide";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { Home, VideoLibrary, Stars } from "@material-ui/icons";
 
-import { WillWatchList } from '../';
+import { WillWatchList } from "../";
 
-import useStyles from './styles';
+import useStyles from "./styles";
 
-import './sideBar.scss';
+import "./sideBar.scss";
 
 interface Props {
   window?: () => Window;
@@ -44,7 +44,9 @@ function HideOnScroll(props: Props) {
   );
 }
 
-export default (props: { window?: () => Window }) => {
+export default (
+  props: { window?: () => Window; onSubmitSearch: (value: string) => void },
+) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -59,15 +61,15 @@ export default (props: { window?: () => Window }) => {
     setOpen(false);
   };
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   const onChangeSearch = (e: any) => setText(e.target.value);
   const onSubmitSearch = (e: any) => {
     e.preventDefault();
     if (text) {
-      console.log(text);
+      props.onSubmitSearch(text);
     }
-    setText('');
+    setText("");
   };
 
   return (
@@ -97,7 +99,7 @@ export default (props: { window?: () => Window }) => {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
-                  inputProps={{ 'aria-label': 'search' }}
+                  inputProps={{ "aria-label": "search" }}
                 />
               </form>
             </div>
@@ -116,11 +118,13 @@ export default (props: { window?: () => Window }) => {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon color="secondary" />
-            ) : (
-              <ChevronRightIcon color="secondary" />
-            )}
+            {theme.direction === "ltr"
+              ? (
+                <ChevronLeftIcon color="secondary" />
+              )
+              : (
+                <ChevronRightIcon color="secondary" />
+              )}
           </IconButton>
         </div>
         <Divider />
@@ -130,7 +134,7 @@ export default (props: { window?: () => Window }) => {
               <ListItemIcon>
                 <Home color="secondary" />
               </ListItemIcon>
-              <ListItemText primary={'main'} />
+              <ListItemText primary={"main"} />
             </ListItem>
           </NavLink>
           <NavLink exact to="/library" className="side-link">
@@ -138,7 +142,7 @@ export default (props: { window?: () => Window }) => {
               <ListItemIcon>
                 <VideoLibrary color="secondary" />
               </ListItemIcon>
-              <ListItemText primary={'library'} />
+              <ListItemText primary={"library"} />
             </ListItem>
           </NavLink>
           <NavLink exact to="/top" className="side-link">
@@ -146,7 +150,7 @@ export default (props: { window?: () => Window }) => {
               <ListItemIcon>
                 <Stars color="secondary" />
               </ListItemIcon>
-              <ListItemText primary={'top'} />
+              <ListItemText primary={"top"} />
             </ListItem>
           </NavLink>
         </List>

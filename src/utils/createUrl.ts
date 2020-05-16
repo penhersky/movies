@@ -12,3 +12,7 @@ export const topMovie = (page: number, voteCountGte = 11000): string =>
 export const getMovieById = (id: number) => {
   return `movie/${id}?api_key=${API_KEY}`;
 };
+
+export const searchMovie = (id: number, text: string, page = 1) => {
+  return `search/movie?api_key=${API_KEY}query=${text}&page=${page}`;
+};

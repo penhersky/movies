@@ -1,30 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import Toolbar from '@material-ui/core/Toolbar';
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Toolbar from "@material-ui/core/Toolbar";
 
-import { Main, Library, MoviePage, Top } from '../../pages';
-import { Header, Loading } from '../../components';
-import { ScrollTop } from '../../fragments';
-import Page404 from '../404';
+import { Main, Library, MoviePage, Top, SearchMoviesPage } from "../../pages";
+import { Header, Loading } from "../../components";
+import { ScrollTop } from "../../fragments";
+import Page404 from "../404";
 
-import { useFetch } from '../../hooks';
+import { useFetch } from "../../hooks";
 
 import {
   SET_MOVIES,
   SET_NEW_MOVIES,
   SET_TOP100_MOVIES,
-} from '../../types/movie';
+} from "../../types/movie";
 
-import { defaultLibrary, topMovie } from '../../utils/createUrl';
+import { defaultLibrary, topMovie } from "../../utils/createUrl";
 
-const initialState = {
-  dates: [],
-  pages: 0,
-  results: [],
-  total_pages: 0,
-  total_results: 0,
-};
+import { initialState } from "../../utils/api";
 
 export default () => {
   const [pages, setPages] = useState({ countPage: 50, activePage: 1 });
@@ -92,9 +86,18 @@ export default () => {
   }, [TopPages, setTopUrl]);
   // */
 
+  // search
+
+  const onSearch = (str: string) => {
+    alert(str);
+  };
+
   return (
     <>
-      <Route path={['/', '/library', '/top']} component={Header} />
+      <Route
+        path={["/", "/library", "/top"]}
+        component={() => <Header onSubmitSearch={onSearch} />}
+      />
       {loading || topLoading ? <Loading /> : null}
       <Toolbar id="back-to-top-anchor" style={{ minHeight: 0 }} />
       <Switch>
@@ -107,11 +110,24 @@ export default () => {
         />
         <Route
           exact
-          path={'/library'}
+          path={"/library"}
           component={() => (
             <Library newPage={getPage} error={error} {...pages} />
           )}
         />
+
+        <Route
+          exact
+          path={"/library/search"}
+          component={() => (
+            <SearchMoviesPage
+              newPage={(page: number) => console.log(page)}
+              error={false}
+              {...{}}
+            />
+          )}
+        />
+
         <Route exact path="/library/movie/:id" component={MoviePage} />
         <Route
           exact
