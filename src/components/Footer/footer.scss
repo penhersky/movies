@@ -1,0 +1,19 @@
+@import '../../variables.scss';
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: wrap row;
+  padding: 10px 10px;
+  img {
+    height: 25px;
+    padding: 10px;
+  }
+  h5 {
+    font-size: 30px;
+    color: $global-error-color;
+    padding: 10px;
+    margin: 0;
+  }
+}

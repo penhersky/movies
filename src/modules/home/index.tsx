@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import Toolbar from "@material-ui/core/Toolbar";
+import React, { useState, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Toolbar from '@material-ui/core/Toolbar';
 
-import { Main, Library, MoviePage, Top, SearchMoviesPage } from "../../pages";
-import { Header, Loading } from "../../components";
-import { ScrollTop } from "../../fragments";
-import Page404 from "../404";
+import { Main, Library, MoviePage, Top, SearchMoviesPage } from '../../pages';
+import { Header, Loading, Footer } from '../../components';
+import { ScrollTop } from '../../fragments';
+import Page404 from '../404';
 
-import { useFetch } from "../../hooks";
+import { useFetch } from '../../hooks';
 
 import {
   SET_MOVIES,
   SET_NEW_MOVIES,
   SET_TOP100_MOVIES,
-} from "../../types/movie";
+} from '../../types/movie';
 
-import { defaultLibrary, topMovie } from "../../utils/createUrl";
+import { defaultLibrary, topMovie } from '../../utils/createUrl';
 
-import { initialState } from "../../utils/api";
+import { initialState } from '../../utils/api';
 
 export default () => {
   const [pages, setPages] = useState({ countPage: 50, activePage: 1 });
@@ -26,85 +26,87 @@ export default () => {
   const dispatch = useDispatch();
 
   const [data, loading, error, setURL] = useFetch(
-    defaultLibrary(pages.activePage),
+    defaultLibrary(1),
     initialState,
   );
 
   const [topData, topLoading, topError, setTopUrl] = useFetch(
-    defaultLibrary(pages.activePage),
+    topMovie(1),
     initialState,
   );
 
   // library /*
   useEffect(() => {
-    if (!data) return;
     setPages((state) => ({
       countPage: data.total_pages,
       activePage: state.activePage,
     }));
     dispatch({ type: SET_MOVIES, movies: data.results });
+  }, [dispatch, data]);
+
+  useEffect(() => {
     if (pages.activePage === 1) {
       dispatch({
         type: SET_NEW_MOVIES,
         newMovies: data.results.slice(0, 10),
       });
     }
-  }, [dispatch, data, pages.activePage]);
-
-  useEffect(() => {
-    setURL(defaultLibrary(pages.activePage));
-  }, [pages, setURL]);
+  }, [data.results, dispatch, pages.activePage]);
 
   const getPage = (page: number) => {
+    setURL(defaultLibrary(pages.activePage));
     setPages((state) => ({
-      countPage: state.activePage,
+      countPage: state.countPage,
       activePage: page,
     }));
   };
+
+  useEffect(() => {
+    setURL(defaultLibrary(pages.activePage));
+  }, [pages.activePage, setURL]);
   // */
 
   // top /*
   useEffect(() => {
-    if (topData) {
-      setTopPages((state) => ({
-        countPage: 5,
-        activePage: state.activePage,
-      }));
-      dispatch({ type: SET_TOP100_MOVIES, topMovies: topData.results });
-    }
+    dispatch({ type: SET_TOP100_MOVIES, topMovies: topData.results });
   }, [dispatch, topData]);
 
   const getTopPage = (page: number) => {
     setTopPages((state) => ({
-      countPage: state.activePage,
+      countPage: state.countPage,
       activePage: page,
     }));
   };
 
   useEffect(() => {
     setTopUrl(topMovie(TopPages.activePage));
-  }, [TopPages, setTopUrl]);
+  }, [TopPages.activePage, setTopUrl]);
   // */
+
+  const path = [
+    '/',
+    '/library',
+    '/top',
+    '/library/search',
+    '/library/movie/:id',
+  ];
 
   return (
     <>
-      <Route
-        path={["/", "/library", "/top"]}
-        component={Header}
-      />
+      <Route exact path={path} component={Header} />
       {loading || topLoading ? <Loading /> : null}
-      <Toolbar id="back-to-top-anchor" style={{ minHeight: 0 }} />
+      <Toolbar id='back-to-top-anchor' style={{ minHeight: 0 }} />
       <Switch>
         <Route
           exact
-          path="/"
+          path='/'
           component={() => (
             <Main loading={loading || topLoading} error={error} />
           )}
         />
         <Route
           exact
-          path={"/library"}
+          path={'/library'}
           component={() => (
             <Library newPage={getPage} error={error} {...pages} />
           )}
@@ -112,20 +114,21 @@ export default () => {
 
         <Route
           exact
-          path={"/library/search"}
+          path={'/library/search'}
           component={() => <SearchMoviesPage />}
         />
 
-        <Route exact path="/library/movie/:id" component={MoviePage} />
+        <Route exact path='/library/movie/:id' component={MoviePage} />
         <Route
           exact
-          path="/top"
+          path='/top'
           component={() => (
             <Top newPage={getTopPage} error={topError} {...TopPages} />
           )}
         />
-        <Route path="*" component={Page404} />
+        <Route path='*' component={Page404} />
       </Switch>
+      <Route exact path={path} component={Footer} />
       <ScrollTop window={() => window} />
     </>
   );
