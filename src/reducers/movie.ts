@@ -2,7 +2,6 @@ import {
   SET_MOVIES,
   SET_NEW_MOVIES,
   SET_TOP100_MOVIES,
-  SET_SEARCH_MOVIES,
   Movie,
 } from '../types/movie';
 
@@ -11,7 +10,6 @@ type MovieAction = {
   movies?: Movie[];
   topMovies?: Movie[];
   newMovies?: Movie[];
-  searchMovies?: Movie[];
 };
 
 export type StateType = {
@@ -23,7 +21,6 @@ export const initialState = {
   movies: [],
   topMovies: [],
   newMovies: [],
-  searchMovies: [],
 };
 
 export const movieReducer = (
@@ -47,11 +44,6 @@ export const movieReducer = (
       return {
         ...state,
         newMovies: action.newMovies,
-      };
-    case SET_SEARCH_MOVIES:
-      return {
-        ...state,
-        searchMovies: action.searchMovies,
       };
     default:
       return state;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
 import clsx from "clsx";
 import {
   IconButton,
@@ -21,6 +21,8 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { Home, VideoLibrary, Stars } from "@material-ui/icons";
+
+import { SET_SEARCH_MOVIES } from "../../types/movie";
 
 import { WillWatchList } from "../";
 
@@ -45,13 +47,15 @@ function HideOnScroll(props: Props) {
 }
 
 export default (
-  props: { window?: () => Window; onSubmitSearch: (value: string) => void },
+  props: any,
 ) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const { willWatch } = useSelector((state: any) => state.willWatchReducer);
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -67,13 +71,14 @@ export default (
   const onSubmitSearch = (e: any) => {
     e.preventDefault();
     if (text) {
-      props.onSubmitSearch(text);
+      dispatch({ type: SET_SEARCH_MOVIES, search: text });
+      setRedirect(true);
     }
-    setText("");
   };
 
   return (
     <>
+      {redirect ? <Redirect to="/library/search" /> : null}
       <HideOnScroll window={props.window}>
         <AppBar className="side-bar">
           <div className="side-content">

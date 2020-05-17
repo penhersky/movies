@@ -86,17 +86,11 @@ export default () => {
   }, [TopPages, setTopUrl]);
   // */
 
-  // search
-
-  const onSearch = (str: string) => {
-    alert(str);
-  };
-
   return (
     <>
       <Route
         path={["/", "/library", "/top"]}
-        component={() => <Header onSubmitSearch={onSearch} />}
+        component={Header}
       />
       {loading || topLoading ? <Loading /> : null}
       <Toolbar id="back-to-top-anchor" style={{ minHeight: 0 }} />
@@ -119,13 +113,7 @@ export default () => {
         <Route
           exact
           path={"/library/search"}
-          component={() => (
-            <SearchMoviesPage
-              newPage={(page: number) => console.log(page)}
-              error={false}
-              {...{}}
-            />
-          )}
+          component={() => <SearchMoviesPage />}
         />
 
         <Route exact path="/library/movie/:id" component={MoviePage} />

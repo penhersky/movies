@@ -10,7 +10,7 @@ const Movie = lazy(() => import("../../components/MovieCard/MovieCard"));
 
 export default (
   props: {
-    movies: [];
+    movies: any[];
     error?: boolean;
     typeMessage?: TypeMessage;
     titleMessage?: string;
