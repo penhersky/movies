@@ -33,31 +33,26 @@ export const useFetch = (initialUrl: String, initialReturnData = {}): any => {
 export const useLazyFetch = (
   initialData = {},
 ): [
-  (data: any, url: string, method: 'POST' | 'PUT' | 'PATH') => void,
-  {},
-  Boolean,
-  Boolean,
+  (url: string, method: 'GET' | 'POST' | 'PUT' | 'PATH') => void,
+  any,
+  boolean,
+  boolean,
 ] => {
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchData = (
-    sentData: any,
-    url: string,
-    method: 'GET' | 'POST' | 'PUT' | 'PATH',
-  ) => {
+  const fetchData = (url: string, method: 'GET' | 'POST' | 'PUT' | 'PATH') => {
     setError(false);
     setLoading(true);
 
-    fetch(`${URL}/${url}`, {
+    fetch(`${URL}${url}`, {
       method,
-      body: JSON.stringify(sentData),
       mode: 'cors',
     })
       .then((response) => response.json())
       .then((result) => {
-        setData(result.data);
+        setData(result);
         setLoading(false);
       })
       .catch(() => {

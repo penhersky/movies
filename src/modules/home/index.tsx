@@ -21,14 +21,10 @@ import { defaultLibrary, topMovie } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
 
 export default () => {
-  const [pages, setPages] = useState({ countPage: 50, activePage: 1 });
   const [TopPages, setTopPages] = useState({ countPage: 5, activePage: 1 });
   const dispatch = useDispatch();
 
-  const [data, loading, error, setURL] = useFetch(
-    defaultLibrary(1),
-    initialState,
-  );
+  const [data, loading, error] = useFetch(defaultLibrary(1), initialState);
 
   const [topData, topLoading, topError, setTopUrl] = useFetch(
     topMovie(1),
@@ -38,34 +34,16 @@ export default () => {
   // library /*
   useEffect(() => {
     if (data.results.length === 0) return;
-    setPages((state) => ({
-      countPage: data.total_pages,
-      activePage: state.activePage,
-    }));
     dispatch({ type: SET_MOVIES, movies: data.results });
   }, [dispatch, data]);
 
   useEffect(() => {
     if (data.results.length === 0) return;
-    if (pages.activePage === 1) {
-      dispatch({
-        type: SET_NEW_MOVIES,
-        newMovies: data.results.slice(0, 10),
-      });
-    }
-  }, [data.results, dispatch, pages.activePage]);
-
-  const getPage = (page: number) => {
-    setURL(defaultLibrary(pages.activePage));
-    setPages((state) => ({
-      countPage: state.countPage,
-      activePage: page,
-    }));
-  };
-
-  useEffect(() => {
-    setURL(defaultLibrary(pages.activePage));
-  }, [pages.activePage, setURL]);
+    dispatch({
+      type: SET_NEW_MOVIES,
+      newMovies: data.results.slice(0, 10),
+    });
+  }, [data.results, dispatch]);
   // */
 
   // top /*
@@ -75,7 +53,7 @@ export default () => {
   }, [dispatch, topData]);
 
   const getTopPage = (page: number) => {
-    setTopPages((state) => ({
+    setTopPages((state: any) => ({
       countPage: state.countPage,
       activePage: page,
     }));
@@ -110,9 +88,7 @@ export default () => {
         <Route
           exact
           path={'/library'}
-          component={() => (
-            <Library newPage={getPage} error={error} {...pages} />
-          )}
+          component={() => <Library error={error} />}
         />
 
         <Route
