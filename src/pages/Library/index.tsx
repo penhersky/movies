@@ -1,29 +1,25 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { MovieList, Pagination } from "../../components";
-import { Parallax } from "../../fragments";
+import { MovieList, Pagination } from '../../components';
+import { Parallax } from '../../fragments';
 
-import image from "../../image/library.jpg";
+import image from '../../image/library.jpg';
 
-import "./index.scss";
+import { Page } from '../../types/props';
 
-type Props = {
-  newPage: (page: number) => void;
-  activePage?: number;
-  countPage?: number;
-  error?: boolean;
-};
+import './index.scss';
 
-export default (props: Props) => {
+export default (props: Page) => {
   document.title = `Space movies | Library | ${props.activePage}`;
   const { movies } = useSelector((state: any) => state.movieReducer);
+
   return (
     <>
       <div>
-        <Parallax img={image} title="Library" opacity={0.5} />
+        <Parallax img={image} title='Library' opacity={0.5} />
       </div>
-      <div className="content">
+      <div className='content'>
         <MovieList movies={movies} error={props.error} />
         <Pagination {...props} />
       </div>

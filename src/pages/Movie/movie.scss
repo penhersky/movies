@@ -57,12 +57,19 @@
   }
 }
 
-@media screen and (max-width: 700px) {
-  .movie-detail {
-    justify-content: center;
+@media screen and (max-width: 1000px) {
+  .movie-page {
+    .movie-container {
+      .movie-detail-data {
+        .movie-detail {
+          text-align: center;
+        }
+      }
+    }
   }
 }
-@media screen and (min-width: 700px) {
+
+@media screen and (min-width: 900px) {
   .movie-page {
     .movie-container {
       .movie-detail-data {

@@ -37,6 +37,7 @@ export default () => {
 
   // library /*
   useEffect(() => {
+    if (data.results.length === 0) return;
     setPages((state) => ({
       countPage: data.total_pages,
       activePage: state.activePage,
@@ -45,6 +46,7 @@ export default () => {
   }, [dispatch, data]);
 
   useEffect(() => {
+    if (data.results.length === 0) return;
     if (pages.activePage === 1) {
       dispatch({
         type: SET_NEW_MOVIES,
@@ -68,6 +70,7 @@ export default () => {
 
   // top /*
   useEffect(() => {
+    if (topData.results.length === 0) return;
     dispatch({ type: SET_TOP100_MOVIES, topMovies: topData.results });
   }, [dispatch, topData]);
 

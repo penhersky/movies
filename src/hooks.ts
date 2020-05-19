@@ -1,4 +1,4 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import URL from './utils/api';
 
 export const useFetch = (initialUrl: String, initialReturnData = {}): any => {
@@ -31,28 +31,28 @@ export const useFetch = (initialUrl: String, initialReturnData = {}): any => {
 };
 
 export const useLazyFetch = (
-  initialUrl: String,
-  sendData = {},
   initialData = {},
 ): [
-  (data: any, method: 'POST' | 'PUT' | 'PATH') => void,
+  (data: any, url: string, method: 'POST' | 'PUT' | 'PATH') => void,
   {},
   Boolean,
   Boolean,
-  Dispatch<SetStateAction<String>>,
 ] => {
   const [data, setData] = useState(initialData);
-  const [url, setUrl] = useState(initialUrl);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchData = (data: any, method: 'POST' | 'PUT' | 'PATH') => {
+  const fetchData = (
+    sentData: any,
+    url: string,
+    method: 'GET' | 'POST' | 'PUT' | 'PATH',
+  ) => {
     setError(false);
     setLoading(true);
 
     fetch(`${URL}/${url}`, {
       method,
-      body: JSON.stringify({ ...sendData, ...data }),
+      body: JSON.stringify(sentData),
       mode: 'cors',
     })
       .then((response) => response.json())
@@ -66,5 +66,5 @@ export const useLazyFetch = (
       });
   };
 
-  return [fetchData, data, loading, error, setUrl];
+  return [fetchData, data, loading, error];
 };
