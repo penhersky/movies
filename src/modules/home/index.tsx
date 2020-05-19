@@ -91,13 +91,9 @@ export default () => {
           component={() => <Library error={error} />}
         />
 
-        <Route
-          exact
-          path={'/library/search'}
-          component={() => <SearchMoviesPage />}
-        />
-
+        <Route exact path={'/library/search'} component={SearchMoviesPage} />
         <Route exact path='/library/movie/:id' component={MoviePage} />
+
         <Route
           exact
           path='/top'

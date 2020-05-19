@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { MovieList, Pagination, Loading } from '../../components';
-import { Parallax } from '../../fragments';
+import { MovieList, Pagination } from '../../components';
+import { Parallax, Spinner } from '../../fragments';
 
 import { libraryUrl } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
@@ -44,7 +44,7 @@ export default (props: { error: boolean }) => {
 
   return (
     <>
-      {loading ? <Loading /> : null}
+      {loading ? <Spinner /> : null}
       <div>
         <Parallax img={image} title='Library' opacity={0.5} />
       </div>
