@@ -14,8 +14,11 @@ import image from '../../image/library.jpg';
 
 import './index.scss';
 
-export default (props: { error: boolean }) => {
-  const [pages, setPages] = useState({ countPage: 50, activePage: 1 });
+export default (props: { error: boolean; countPage: number }) => {
+  const [pages, setPages] = useState({
+    countPage: props.countPage,
+    activePage: 1,
+  });
   document.title = `Space movies | Library | ${pages.activePage}`;
 
   const dispatch = useDispatch();

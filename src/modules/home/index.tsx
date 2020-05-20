@@ -88,7 +88,9 @@ export default () => {
         <Route
           exact
           path={'/library'}
-          component={() => <Library error={error} />}
+          component={() => (
+            <Library error={error} countPage={data.total_pages || 50} />
+          )}
         />
 
         <Route exact path={'/library/search'} component={SearchMoviesPage} />

@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import Particles from 'react-particles-js';
 
 import { MovieCard, Slick } from '../../components';
 import { Message } from '../../fragments';
@@ -10,30 +11,64 @@ export default (props: { loading: boolean; error: boolean }) => {
   document.title = 'Space movies | Main';
   const { newMovies } = useSelector((state: any) => state.movieReducer);
 
-  const scroll = useRef<HTMLDivElement>(document.createElement('div'));
-  const title = useRef<HTMLHeadingElement>(document.createElement('h1'));
-
-  document.addEventListener('scroll', () => {
-    try {
-      const scrollY = window.scrollY;
-      if (scrollY !== 0) {
-        title.current.style.display = 'none';
-        scroll.current.style.backgroundPosition = `calc(50% + ${scrollY}px) calc(50% + ${scrollY}px)`;
-      } else {
-        scroll.current.style.backgroundPosition = '';
-        title.current.style.display = 'initial';
-      }
-    } catch {}
-  });
+  const params = {
+    particles: {
+      number: {
+        value: 120,
+        density: {
+          enable: true,
+          value_area: 1500,
+        },
+      },
+      line_linked: {
+        enable: true,
+        opacity: 0.02,
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        random: true,
+        straight: false,
+        bounce: false,
+        attract: { enable: false, rotateX: 600, rotateY: 600 },
+      },
+      size: {
+        value: 3,
+      },
+      opacity: {
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.05,
+        },
+      },
+    },
+    interactivity: {
+      events: {
+        onclick: {
+          enable: true,
+          mode: 'push',
+        },
+        onhover: {
+          enable: true,
+          mode: 'repulse',
+        },
+      },
+      modes: {
+        push: {
+          particles_nb: 1,
+        },
+      },
+    },
+    retina_detect: true,
+  };
 
   return (
     <div className='main'>
-      <h1 id='main-hat-title' ref={title}>
-        Space
-      </h1>
-      <div id='parallax' ref={scroll}>
-        <span>Movies</span>
-      </div>
+      <h1 id='main-hat-title'>Space Movies</h1>
+
+      <Particles className='parallax' params={params} />
+
       <div className='main-body'>
         <div className='main-new-movies'>
           <div className='new-movies-title'>
