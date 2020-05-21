@@ -26,12 +26,15 @@ export default (props: any) => {
   }, [data.results]);
 
   useEffect(() => {
-    if (movies !== []) return;
-    setWarning(true);
-    setMessage({
-      title: 'Nothing was found for your query.',
-      body: 'Try to write the name differently!',
-    });
+    if (movies?.length !== 0) {
+      setWarning(false);
+    } else {
+      setWarning(true);
+      setMessage({
+        title: 'Nothing was found for your query.',
+        body: 'Try to write the name differently!',
+      });
+    }
   }, [movies]);
 
   useEffect(() => {
