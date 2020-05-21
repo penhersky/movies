@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-import { useFetch } from "../../hooks";
-import { searchMovie } from "../../utils/createUrl";
-import { initialState } from "../../utils/api";
+import { useFetch } from '../../hooks';
+import { searchMovie } from '../../utils/createUrl';
+import { initialState } from '../../utils/api';
 
-import { MovieList, Pagination, Loading } from "../../components";
+import { MovieList, Pagination } from '../../components';
+import { Spinner } from '../../fragments';
 
 export default (props: any) => {
   document.title = `Space movies | Search | ${props.activePage | 1}`;
@@ -13,9 +14,7 @@ export default (props: any) => {
   const [warning, setWarning] = useState(false);
   const [movies, setMovie] = useState<Array<any>>([]);
 
-  const [message, setMessage] = useState(
-    { title: "", body: "" },
-  );
+  const [message, setMessage] = useState({ title: '', body: '' });
 
   const [data, loading, error, setURL] = useFetch(
     searchMovie(search, 1),
@@ -27,12 +26,15 @@ export default (props: any) => {
   }, [data.results]);
 
   useEffect(() => {
-    if (movies !== []) return;
-    setWarning(true);
-    setMessage({
-      title: "Nothing was found for your query.",
-      body: "Try to write the name differently!",
-    });
+    if (movies?.length !== 0) {
+      setWarning(false);
+    } else {
+      setWarning(true);
+      setMessage({
+        title: 'Nothing was found for your query.',
+        body: 'Try to write the name differently!',
+      });
+    }
   }, [movies]);
 
   useEffect(() => {
@@ -45,14 +47,14 @@ export default (props: any) => {
 
   return (
     <>
-      {loading ? <Loading /> : null}
-      <div className="content">
+      {loading ? <Spinner /> : null}
+      <div className='content'>
         <MovieList
           movies={movies || []}
           error={error || warning}
           titleMessage={message.title}
           bodyMessage={message.body}
-          typeMessage={error ? "warning" : undefined}
+          typeMessage={error ? 'warning' : undefined}
         />
         <Pagination
           newPage={newPage}

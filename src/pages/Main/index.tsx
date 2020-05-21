@@ -1,67 +1,101 @@
-import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Particles from 'react-particles-js';
 
-import { MovieCard, Slick } from "../../components";
-import { Message } from "../../fragments";
+import { MovieCard, Slick } from '../../components';
+import { Message } from '../../fragments';
 
-import "./main.scss";
+import './main.scss';
 
 export default (props: { loading: boolean; error: boolean }) => {
-  document.title = "Space movies | Main";
+  document.title = 'Space movies | Main';
   const { newMovies } = useSelector((state: any) => state.movieReducer);
 
-  const scroll = useRef<HTMLDivElement>(document.createElement("div"));
-  const title = useRef<HTMLHeadingElement>(document.createElement("h1"));
-
-  document.addEventListener("scroll", () => {
-    try {
-      const scrollY = window.scrollY;
-      if (scrollY !== 0) {
-        title.current.style.display = "none";
-        scroll.current.style.backgroundPosition =
-          `calc(50% + ${scrollY}px) calc(50% + ${scrollY}px)`;
-      } else {
-        scroll.current.style.backgroundPosition = "";
-        title.current.style.display = "initial";
-      }
-    } catch {}
-  });
+  const params = {
+    particles: {
+      number: {
+        value: 120,
+        density: {
+          enable: true,
+          value_area: 1500,
+        },
+      },
+      line_linked: {
+        enable: true,
+        opacity: 0.02,
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        random: true,
+        straight: false,
+        bounce: false,
+        attract: { enable: false, rotateX: 600, rotateY: 600 },
+      },
+      size: {
+        value: 3,
+      },
+      opacity: {
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.05,
+        },
+      },
+    },
+    interactivity: {
+      events: {
+        onclick: {
+          enable: true,
+          mode: 'push',
+        },
+        onhover: {
+          enable: true,
+          mode: 'repulse',
+        },
+      },
+      modes: {
+        push: {
+          particles_nb: 1,
+        },
+      },
+    },
+    retina_detect: true,
+  };
 
   return (
-    <div className="main">
-      <h1 id="main-hat-title" ref={title}>
-        Space
-      </h1>
-      <div id="parallax" ref={scroll}>
-        <span>Movies</span>
-      </div>
-      <div className="main-body">
-        <div className="main-new-movies">
-          <div className="new-movies-title">
+    <div className='main'>
+      <h1 id='main-hat-title'>Space Movies</h1>
+
+      <Particles className='parallax' params={params} />
+
+      <div className='main-body'>
+        <div className='main-new-movies'>
+          <div className='new-movies-title'>
             <h3>New</h3>
           </div>
-          {props.error
-            ? (
-              <Message
-                title="Load movie list error!"
-                body="Please reload this page."
-                type="warning"
-                style={{ width: "100%", height: "100%" }}
-              />
-            )
-            : (
-              <Slick>
-                {props.loading ? [] : newMovies.map((movie: any) => (
-                  <span className="card wiper-slide" key={movie.id}>
-                    <MovieCard data={movie} />
-                  </span>
-                ))}
-              </Slick>
-            )}
+          {props.error ? (
+            <Message
+              title='Load movie list error!'
+              body='Please reload this page.'
+              type='warning'
+              style={{ width: '100%', height: '100%' }}
+            />
+          ) : (
+            <Slick>
+              {props.loading
+                ? []
+                : newMovies.map((movie: any) => (
+                    <span className='card wiper-slide' key={movie.id}>
+                      <MovieCard data={movie} />
+                    </span>
+                  ))}
+            </Slick>
+          )}
         </div>
 
-        <div className="body-text">
-          <div id="main-text">
+        <div className='body-text'>
+          <div id='main-text'>
             <h1>Terms of use</h1>
             <p>
               1. All used audiovisual materials, links to which are posted on
@@ -94,6 +128,10 @@ export default (props: { loading: boolean; error: boolean }) => {
               5. Using this resource, the user agrees that he is 18 years old
               and assumes the risks associated with the possible harm caused by
               the use of information in published materials.
+            </p>
+            <p>
+              5. This resource was created exclusively for non-commercial
+              purposes. And does not bring any financial benefits.
             </p>
           </div>
         </div>

@@ -10,9 +10,18 @@
     height: 25px;
     padding: 10px;
   }
+  .contact-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap row;
+    a {
+      margin: 10px;
+    }
+  }
   h5 {
     font-size: 30px;
-    color: $global-error-color;
+    color: $global-tab-color;
     padding: 10px;
     margin: 0;
   }

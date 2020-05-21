@@ -29,10 +29,10 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider maxSnack={3}>
-        <div className="App">
+        <div className='App'>
           <Switch>
-            <Route path="/account" component={Auth} />
-            <Route path="/" component={Home} />
+            <Route path='/account' component={Auth} />
+            <Route path='/' component={Home} />
           </Switch>
         </div>
       </SnackbarProvider>
