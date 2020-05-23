@@ -1,25 +1,30 @@
 import {
   SET_MOVIES,
   SET_NEW_MOVIES,
-  SET_TOP100_MOVIES,
+  SET_ACTIVE_PAGE,
+  SET_COUNT_PAGE,
   Movie,
 } from '../types/movie';
 
 type MovieAction = {
   type: string;
   movies?: Movie[];
-  topMovies?: Movie[];
+  activePage?: number;
+  countPages?: number;
   newMovies?: Movie[];
 };
 
 export type StateType = {
   movies: Movie[] | [];
-  topMovies: Movie[] | [];
+  activePage: number;
+  countPages: number;
+  newMovies: Movie[];
 };
 
 export const initialState = {
   movies: [],
-  topMovies: [],
+  activePage: 1,
+  countPages: 500,
   newMovies: [],
 };
 
@@ -33,11 +38,15 @@ export const movieReducer = (
         ...state,
         movies: action.movies,
       };
-
-    case SET_TOP100_MOVIES:
+    case SET_ACTIVE_PAGE:
       return {
         ...state,
-        topMovies: action.topMovies,
+        activePage: action.activePage,
+      };
+    case SET_COUNT_PAGE:
+      return {
+        ...state,
+        countPages: action.countPages,
       };
 
     case SET_NEW_MOVIES:

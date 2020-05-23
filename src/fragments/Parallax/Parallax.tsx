@@ -15,10 +15,12 @@ export default ({
 }) => {
   return (
     <div
-      className="parallax"
+      className='parallax'
       style={{ backgroundImage: `url(${img})`, opacity: imgOpacity }}
     >
-      <h2 style={{ opacity }}>{title}</h2>
+      <h2 style={{ opacity, fontSize: title.length > 35 ? '3vw' : '5vw' }}>
+        {title}
+      </h2>
     </div>
   );
 };
