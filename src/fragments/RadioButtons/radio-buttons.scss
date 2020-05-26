@@ -6,18 +6,5 @@
   justify-content: center;
   flex-flow: wrap row;
   color: $global-tab-color;
-  .radio-item {
-    padding: 5px;
-    cursor: pointer;
-    transition: linear 0.9s;
-    border: 1px solid rgba(245, 222, 179, 0);
-    &:hover {
-      border: 1px solid $global-link-hover-color;
-    }
-    &:checked {
-      color: $global-background;
-      border: 1px solid $global-link-hover-color;
-      background-color: $global-primary-background;
-    }
-  }
+  margin: 2px;
 }

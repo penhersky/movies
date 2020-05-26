@@ -7,3 +7,4 @@ export { default as Message } from './message/QueruProblem';
 export { default as Spinner } from './Spiner/Spinner';
 export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as RadioButtons } from './RadioButtons/RadioButtons';
+export { default as IconButton } from './iconButton/IconButton';

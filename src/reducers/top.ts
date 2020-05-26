@@ -9,19 +9,19 @@ type MovieAction = {
   type: string;
   activeTopPage?: number;
   topMovies?: Movie[];
-  gender?: number;
+  genre?: number;
 };
 
 export type StateType = {
   activeTopPage: number;
   topMovies: Movie[] | [];
-  gender: number;
+  genre: number;
 };
 
 export const initialState = {
   activeTopPage: 1,
   topMovies: [],
-  gender: 0,
+  genre: 0,
 };
 
 export const topMovieReducer = (
@@ -44,7 +44,7 @@ export const topMovieReducer = (
     case SET_GENDER_TOP100:
       return {
         ...state,
-        gender: action.gender,
+        genre: action.genre,
       };
 
     default:

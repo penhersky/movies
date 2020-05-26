@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import ClearIcon from '@material-ui/icons/Clear';
+
 import { Pagination, MovieList, SortPanel } from '../../components';
-import { Parallax, Spinner, RadioButtons } from '../../fragments';
+import { Parallax, Spinner, RadioButtons, IconButton } from '../../fragments';
 
 import { topMovie } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
@@ -22,7 +24,7 @@ export default (props: Page) => {
   document.title = `Space movies | TOP | ${props.activePage}`;
   const dispatch = useDispatch();
 
-  const { topMovies, activeTopPage, gender } = useSelector(
+  const { topMovies, activeTopPage, genre } = useSelector(
     (state: any) => state.topMovieReducer,
   );
   const [fetchData, data, loading, error] = useLazyFetch(initialState);
@@ -34,14 +36,29 @@ export default (props: Page) => {
 
   const getPage = (page: number) => {
     dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: page });
-    fetchData(topMovie(page), 'GET');
+
+    if (genre !== 0) fetchData(topMovie(page, genre, 200), 'GET');
+    else fetchData(topMovie(page), 'GET');
   };
 
   const onChangeGenres = (id: number) => {
+    if (id === genre) return;
     dispatch({
       type: SET_GENDER_TOP100,
       gender: id,
     });
+    dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
+    fetchData(topMovie(1, id, 200), 'GET');
+  };
+
+  const clear = () => {
+    if (0 === genre) return;
+    dispatch({
+      type: SET_GENDER_TOP100,
+      gender: 0,
+    });
+    dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
+    fetchData(topMovie(1), 'GET');
   };
 
   return (
@@ -50,11 +67,8 @@ export default (props: Page) => {
       <Parallax title='top 100 movies' img={img} opacity={0.6} />
       <div className='content'>
         <SortPanel>
-          <RadioButtons
-            list={genres}
-            onChange={onChangeGenres}
-            value={gender}
-          />
+          <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
+          <IconButton Icon={ClearIcon} onClick={clear} />
         </SortPanel>
         <MovieList movies={topMovies} error={props.error || error} />
         <Pagination
