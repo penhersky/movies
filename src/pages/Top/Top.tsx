@@ -1,24 +1,28 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Pagination, MovieList } from '../../components';
-import { Parallax, Spinner } from '../../fragments';
+import { Pagination, MovieList, SortPanel } from '../../components';
+import { Parallax, Spinner, RadioButtons } from '../../fragments';
 
 import { topMovie } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
 import { useLazyFetch } from '../../hooks';
 
-import { SET_TOP100_MOVIES, SET_ACTIVE_TOP100_PAGE } from '../../types/movie';
+import {
+  SET_TOP100_MOVIES,
+  SET_ACTIVE_TOP100_PAGE,
+  SET_GENDER_TOP100,
+} from '../../types/movie';
 
 import img from '../../image/top.jpg';
+import genres from '../../utils/genresList';
 
 import { Page } from '../../types/props';
 export default (props: Page) => {
   document.title = `Space movies | TOP | ${props.activePage}`;
-
   const dispatch = useDispatch();
 
-  const { topMovies, activeTopPage } = useSelector(
+  const { topMovies, activeTopPage, gender } = useSelector(
     (state: any) => state.topMovieReducer,
   );
   const [fetchData, data, loading, error] = useLazyFetch(initialState);
@@ -33,11 +37,25 @@ export default (props: Page) => {
     fetchData(topMovie(page), 'GET');
   };
 
+  const onChangeGenres = (id: number) => {
+    dispatch({
+      type: SET_GENDER_TOP100,
+      gender: id,
+    });
+  };
+
   return (
     <>
       {loading ? <Spinner /> : null}
       <Parallax title='top 100 movies' img={img} opacity={0.6} />
       <div className='content'>
+        <SortPanel>
+          <RadioButtons
+            list={genres}
+            onChange={onChangeGenres}
+            value={gender}
+          />
+        </SortPanel>
         <MovieList movies={topMovies} error={props.error || error} />
         <Pagination
           activePage={activeTopPage}

@@ -5,3 +5,5 @@ export { default as Parallax } from './Parallax/Parallax';
 export { default as Select } from './select/Select';
 export { default as Message } from './message/QueruProblem';
 export { default as Spinner } from './Spiner/Spinner';
+export { default as Checkbox } from './Checkbox/Checkbox';
+export { default as RadioButtons } from './RadioButtons/RadioButtons';
