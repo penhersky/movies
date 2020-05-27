@@ -4,6 +4,8 @@ import {
   SET_ACTIVE_PAGE,
   SET_COUNT_PAGE,
   SET_GENRE,
+  SET_VOTE_AVERAGE,
+  CLEAR_SORT,
   Movie,
 } from '../types/movie';
 
@@ -13,6 +15,7 @@ type MovieAction = {
   activePage?: number;
   countPages?: number;
 
+  voteAverage: number[];
   genre?: number;
 
   newMovies?: Movie[];
@@ -23,7 +26,8 @@ export type StateType = {
   activePage: number;
   countPages: number;
 
-  genre?: number;
+  voteAverage: number[];
+  genre: number;
 
   newMovies: Movie[];
 };
@@ -33,6 +37,7 @@ export const initialState = {
   activePage: 1,
   countPages: 500,
 
+  voteAverage: [0, 10],
   genre: 0,
 
   newMovies: [],
@@ -63,6 +68,19 @@ export const movieReducer = (
       return {
         ...state,
         genre: action.genre,
+      };
+
+    case SET_VOTE_AVERAGE:
+      return {
+        ...state,
+        voteAverage: action.voteAverage,
+      };
+
+    case CLEAR_SORT:
+      return {
+        ...state,
+        genre: 0,
+        voteAverage: [0, 10],
       };
 
     case SET_NEW_MOVIES:

@@ -1,11 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ClearIcon from '@material-ui/icons/Clear';
 import FindReplaceIcon from '@material-ui/icons/FindReplace';
 
 import { MovieList, Pagination, SortPanel } from '../../components';
-import { Parallax, Spinner, IconButton, RadioButtons } from '../../fragments';
+import {
+  Parallax,
+  Spinner,
+  IconButton,
+  RadioButtons,
+  RangeSlider,
+} from '../../fragments';
 
 import { libraryUrl } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
@@ -15,6 +21,8 @@ import {
   SET_MOVIES,
   SET_ACTIVE_PAGE,
   SET_COUNT_PAGE,
+  SET_VOTE_AVERAGE,
+  CLEAR_SORT,
   SET_GENRE,
 } from '../../types/movie';
 
@@ -24,9 +32,10 @@ import genres from '../../utils/genresList';
 import './index.scss';
 
 export default (props: { error: boolean }) => {
-  const { movies, activePage, countPages, genre } = useSelector(
+  const { movies, activePage, countPages, genre, voteAverage } = useSelector(
     (state: any) => state.movieReducer,
   );
+  const [LocalVoteAverage, setLocalVoteAverage] = useState(voteAverage);
   document.title = `Space movies | Library | ${activePage}`;
 
   const dispatch = useDispatch();
@@ -58,6 +67,10 @@ export default (props: { error: boolean }) => {
     );
   };
 
+  const onChangeVoteAverage = (value: number[]) => {
+    setLocalVoteAverage(value);
+  };
+
   const onChangeGenres = (id: number) => {
     if (genre === id) return;
     dispatch({
@@ -68,16 +81,18 @@ export default (props: { error: boolean }) => {
 
   const find = () => {
     dispatch({ type: SET_ACTIVE_PAGE, activePage: 1 });
-    console.log('find');
+    dispatch({
+      type: SET_VOTE_AVERAGE,
+      voteAverage: LocalVoteAverage,
+    });
+    // request
   };
 
   const clear = () => {
-    if (activePage !== 1) dispatch({ type: SET_ACTIVE_PAGE, activePage: 1 });
-    if (genre !== 0)
-      dispatch({
-        type: SET_GENRE,
-        genre: 0,
-      });
+    dispatch({
+      type: CLEAR_SORT,
+    });
+    setLocalVoteAverage([0, 10]);
   };
 
   return (
@@ -88,6 +103,11 @@ export default (props: { error: boolean }) => {
       </div>
       <div className='content'>
         <SortPanel>
+          <RangeSlider
+            value={LocalVoteAverage}
+            label='Vote average'
+            onChange={onChangeVoteAverage}
+          />
           <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
           <div className='button-group'>
             <IconButton Icon={ClearIcon} onClick={clear} />

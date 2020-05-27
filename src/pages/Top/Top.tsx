@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import ClearIcon from '@material-ui/icons/Clear';
-
 import { Pagination, MovieList, SortPanel } from '../../components';
-import { Parallax, Spinner, RadioButtons, IconButton } from '../../fragments';
+import { Parallax, Spinner, RadioButtons } from '../../fragments';
 
 import { topMovie } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
@@ -42,23 +40,23 @@ export default (props: Page) => {
   };
 
   const onChangeGenres = (id: number) => {
-    if (id === genre) return;
+    if (id === genre) {
+      dispatch({
+        type: SET_GENDER_TOP100,
+        genre: 0,
+      });
+      dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
+      fetchData(topMovie(1), 'GET');
+      return;
+    }
+
     dispatch({
       type: SET_GENDER_TOP100,
       genre: id,
     });
+
     dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
     fetchData(topMovie(1, id, 200), 'GET');
-  };
-
-  const clear = () => {
-    if (0 === genre) return;
-    dispatch({
-      type: SET_GENDER_TOP100,
-      genre: 0,
-    });
-    dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
-    fetchData(topMovie(1), 'GET');
   };
 
   return (
@@ -68,9 +66,6 @@ export default (props: Page) => {
       <div className='content'>
         <SortPanel>
           <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
-          <div className='button-group'>
-            <IconButton Icon={ClearIcon} onClick={clear} />
-          </div>
         </SortPanel>
         <MovieList movies={topMovies} error={props.error || error} />
         <Pagination

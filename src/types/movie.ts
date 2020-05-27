@@ -3,6 +3,8 @@ export const SET_MOVIES = 'SET_MOVIES';
 export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE';
 export const SET_COUNT_PAGE = 'SET_COUNT_PAGE';
 export const SET_GENRE = 'SET_GENRE';
+export const SET_VOTE_AVERAGE = 'SET_VOTE_AVERAGE';
+export const CLEAR_SORT = 'CLEAR_SORT';
 
 export const SET_NEW_MOVIES = 'SET_NEW_MOVIES';
 
