@@ -2,6 +2,7 @@ export const GET_MOVIE = 'GET_MOVIE';
 export const SET_MOVIES = 'SET_MOVIES';
 export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE';
 export const SET_COUNT_PAGE = 'SET_COUNT_PAGE';
+export const SET_GENRE = 'SET_GENRE';
 
 export const SET_NEW_MOVIES = 'SET_NEW_MOVIES';
 

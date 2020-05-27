@@ -1,21 +1,30 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { MovieList, Pagination } from '../../components';
-import { Parallax, Spinner } from '../../fragments';
+import ClearIcon from '@material-ui/icons/Clear';
+import FindReplaceIcon from '@material-ui/icons/FindReplace';
+
+import { MovieList, Pagination, SortPanel } from '../../components';
+import { Parallax, Spinner, IconButton, RadioButtons } from '../../fragments';
 
 import { libraryUrl } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
 import { useLazyFetch } from '../../hooks';
 
-import { SET_MOVIES, SET_ACTIVE_PAGE, SET_COUNT_PAGE } from '../../types/movie';
+import {
+  SET_MOVIES,
+  SET_ACTIVE_PAGE,
+  SET_COUNT_PAGE,
+  SET_GENRE,
+} from '../../types/movie';
 
 import image from '../../image/library.jpg';
+import genres from '../../utils/genresList';
 
 import './index.scss';
 
 export default (props: { error: boolean }) => {
-  const { movies, activePage, countPages } = useSelector(
+  const { movies, activePage, countPages, genre } = useSelector(
     (state: any) => state.movieReducer,
   );
   document.title = `Space movies | Library | ${activePage}`;
@@ -49,6 +58,28 @@ export default (props: { error: boolean }) => {
     );
   };
 
+  const onChangeGenres = (id: number) => {
+    if (genre === id) return;
+    dispatch({
+      type: SET_GENRE,
+      genre: id,
+    });
+  };
+
+  const find = () => {
+    dispatch({ type: SET_ACTIVE_PAGE, activePage: 1 });
+    console.log('find');
+  };
+
+  const clear = () => {
+    if (activePage !== 1) dispatch({ type: SET_ACTIVE_PAGE, activePage: 1 });
+    if (genre !== 0)
+      dispatch({
+        type: SET_GENRE,
+        genre: 0,
+      });
+  };
+
   return (
     <>
       {loading ? <Spinner /> : null}
@@ -56,6 +87,13 @@ export default (props: { error: boolean }) => {
         <Parallax img={image} title='Library' opacity={0.5} />
       </div>
       <div className='content'>
+        <SortPanel>
+          <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
+          <div className='button-group'>
+            <IconButton Icon={ClearIcon} onClick={clear} />
+            <IconButton Icon={FindReplaceIcon} onClick={find} />
+          </div>
+        </SortPanel>
         <MovieList movies={movies} error={props.error || error} />
         <Pagination
           activePage={activePage}

@@ -45,7 +45,7 @@ export default (props: Page) => {
     if (id === genre) return;
     dispatch({
       type: SET_GENDER_TOP100,
-      gender: id,
+      genre: id,
     });
     dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
     fetchData(topMovie(1, id, 200), 'GET');
@@ -55,7 +55,7 @@ export default (props: Page) => {
     if (0 === genre) return;
     dispatch({
       type: SET_GENDER_TOP100,
-      gender: 0,
+      genre: 0,
     });
     dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
     fetchData(topMovie(1), 'GET');
@@ -68,7 +68,9 @@ export default (props: Page) => {
       <div className='content'>
         <SortPanel>
           <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
-          <IconButton Icon={ClearIcon} onClick={clear} />
+          <div className='button-group'>
+            <IconButton Icon={ClearIcon} onClick={clear} />
+          </div>
         </SortPanel>
         <MovieList movies={topMovies} error={props.error || error} />
         <Pagination
