@@ -1,28 +1,20 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-
-const useStyles = makeStyles({
-  root: {
-    width: 300,
-  },
-});
 
 export default (props: {
   value: number[];
   label: string;
   marks?: { value: number; label: string }[];
+  width?: number;
   onChange: (value: number[]) => void;
 }) => {
-  const classes = useStyles();
-
   const handleChange = (event: any, newValue: number | number[]) => {
     props.onChange(newValue as number[]);
   };
 
   return (
-    <div className={classes.root}>
+    <div style={{ width: props.width || 300 }}>
       <Typography id='range-slider' color='secondary' gutterBottom>
         {props.label}
       </Typography>

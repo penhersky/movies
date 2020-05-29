@@ -62,6 +62,8 @@ export default (props: { error: boolean }) => {
       libraryUrl(
         page,
         '&language=en-US&sort_by=primary_release_date.desc&primary_release_date.lte=now&vote_count.gte=10',
+        genre,
+        voteAverage,
       ),
       'GET',
     );
@@ -80,12 +82,21 @@ export default (props: { error: boolean }) => {
   };
 
   const find = () => {
-    dispatch({ type: SET_ACTIVE_PAGE, activePage: 1 });
     dispatch({
       type: SET_VOTE_AVERAGE,
       voteAverage: LocalVoteAverage,
     });
-    // request
+    dispatch({ type: SET_ACTIVE_PAGE, activePage: 1 });
+
+    fetchData(
+      libraryUrl(
+        1,
+        '&language=en-US&sort_by=primary_release_date.desc&primary_release_date.lte=now&vote_count.gte=10',
+        genre,
+        LocalVoteAverage,
+      ),
+      'GET',
+    );
   };
 
   const clear = () => {
@@ -93,6 +104,13 @@ export default (props: { error: boolean }) => {
       type: CLEAR_SORT,
     });
     setLocalVoteAverage([0, 10]);
+    fetchData(
+      libraryUrl(
+        1,
+        '&language=en-US&sort_by=primary_release_date.desc&primary_release_date.lte=now&vote_count.gte=10',
+      ),
+      'GET',
+    );
   };
 
   return (
@@ -103,15 +121,23 @@ export default (props: { error: boolean }) => {
       </div>
       <div className='content'>
         <SortPanel>
-          <RangeSlider
-            value={LocalVoteAverage}
-            label='Vote average'
-            onChange={onChangeVoteAverage}
-          />
+          <div className='hat-library-sort'>
+            <RangeSlider
+              value={LocalVoteAverage}
+              label='Vote average'
+              onChange={onChangeVoteAverage}
+              width={200}
+            />
+          </div>
+
           <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
           <div className='button-group'>
-            <IconButton Icon={ClearIcon} onClick={clear} />
-            <IconButton Icon={FindReplaceIcon} onClick={find} />
+            <IconButton Icon={ClearIcon} onClick={clear} tooltip='Clear' />
+            <IconButton
+              Icon={FindReplaceIcon}
+              onClick={find}
+              tooltip='Find or refresh'
+            />
           </div>
         </SortPanel>
         <MovieList movies={movies} error={props.error || error} />

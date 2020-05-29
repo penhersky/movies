@@ -19,7 +19,7 @@ type Props = {
   handler: (value: string) => void;
   value: string;
   defaultValue: string;
-  list: { value: string; title: string }[];
+  list: string[];
 };
 
 export default (props: Props) => {
@@ -31,21 +31,27 @@ export default (props: Props) => {
 
   return (
     <>
-      <FormControl variant="outlined" color="secondary" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">{props.label}</InputLabel>
+      <FormControl
+        variant='standard'
+        color='secondary'
+        className={classes.formControl}
+      >
+        <InputLabel id='demo-simple-select-outlined-label'>
+          {props.label}
+        </InputLabel>
         <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
+          labelId='demo-simple-select-outlined-label'
+          id='demo-simple-select-outlined'
           value={props.value}
           onChange={handleChange}
           label={props.label}
         >
-          <MenuItem value="">
+          <MenuItem value=''>
             <em>{props.defaultValue}</em>
           </MenuItem>
           {props.list.map((item) => (
-            <MenuItem value={item.value} key={item.value}>
-              {item.title}
+            <MenuItem value={item} key={item}>
+              {item}
             </MenuItem>
           ))}
         </Select>
