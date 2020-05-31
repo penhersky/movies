@@ -9,3 +9,4 @@ export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as RadioButtons } from './RadioButtons/RadioButtons';
 export { default as IconButton } from './iconButton/IconButton';
 export { default as RangeSlider } from './RangeSlider/RangeSlider';
+export { default as SortBy } from './SortBy/SortBy';

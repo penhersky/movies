@@ -11,6 +11,7 @@ import {
   IconButton,
   RadioButtons,
   RangeSlider,
+  SortBy,
 } from '../../fragments';
 
 import { libraryUrl } from '../../utils/createUrl';
@@ -36,6 +37,9 @@ export default (props: { error: boolean }) => {
     (state: any) => state.movieReducer,
   );
   const [LocalVoteAverage, setLocalVoteAverage] = useState(voteAverage);
+  const [sortBY, setSortBy] = useState<'desc' | 'asc'>('desc');
+  const [sortType, setSortType] = useState('');
+
   document.title = `Space movies | Library | ${activePage}`;
 
   const dispatch = useDispatch();
@@ -67,6 +71,14 @@ export default (props: { error: boolean }) => {
       ),
       'GET',
     );
+  };
+
+  const onChangeSortVoteAverage = (
+    value: 'desc' | 'asc',
+    type: string | undefined,
+  ) => {
+    setSortType(String(type));
+    setSortBy(value);
   };
 
   const onChangeVoteAverage = (value: number[]) => {
@@ -104,6 +116,7 @@ export default (props: { error: boolean }) => {
       type: CLEAR_SORT,
     });
     setLocalVoteAverage([0, 10]);
+    setSortType('');
     fetchData(
       libraryUrl(
         1,
@@ -121,7 +134,33 @@ export default (props: { error: boolean }) => {
       </div>
       <div className='content'>
         <SortPanel>
-          <div className='hat-library-sort'>
+          <div className='library-sort'>
+            <div className='hat-library-sort'>
+              <SortBy
+                label='vote average'
+                isChecked={sortType === 'vote average'}
+                onChecked={onChangeSortVoteAverage}
+                value={sortBY}
+              />
+              <SortBy
+                label='vote count'
+                isChecked={sortType === 'vote count'}
+                onChecked={onChangeSortVoteAverage}
+                value={sortBY}
+              />
+              <SortBy
+                label='popularity'
+                isChecked={sortType === 'popularity'}
+                onChecked={onChangeSortVoteAverage}
+                value={sortBY}
+              />
+              <SortBy
+                label='release date'
+                isChecked={sortType === 'release date'}
+                onChecked={onChangeSortVoteAverage}
+                value={sortBY}
+              />
+            </div>
             <RangeSlider
               value={LocalVoteAverage}
               label='Vote average'

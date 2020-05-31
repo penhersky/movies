@@ -4,7 +4,17 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.hat-library-sort {
+.library-sort {
   display: flex;
-  flex-flow: wrap row;
+  flex-flow: wrap column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .hat-library-sort {
+    width: 100%;
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
