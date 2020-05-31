@@ -22,8 +22,8 @@ import {
   SET_MOVIES,
   SET_ACTIVE_PAGE,
   SET_COUNT_PAGE,
-  SET_VOTE_AVERAGE,
   CLEAR_SORT,
+  SET_SORT,
   SET_GENRE,
 } from '../../types/movie';
 
@@ -32,13 +32,27 @@ import genres from '../../utils/genresList';
 
 import './index.scss';
 
+const sortTypes = {
+  voteAverage: 'vote average',
+  voteCount: 'vote count',
+  popularity: 'popularity',
+  releaseDate: 'primary release date',
+};
+
 export default (props: { error: boolean }) => {
-  const { movies, activePage, countPages, genre, voteAverage } = useSelector(
-    (state: any) => state.movieReducer,
-  );
+  const {
+    movies,
+    activePage,
+    countPages,
+    genre,
+    voteAverage,
+    sortBy,
+    sortType,
+  } = useSelector((state: any) => state.movieReducer);
+
   const [LocalVoteAverage, setLocalVoteAverage] = useState(voteAverage);
-  const [sortBY, setSortBy] = useState<'desc' | 'asc'>('desc');
-  const [sortType, setSortType] = useState('');
+  const [sortBY, setSortBy] = useState<'desc' | 'asc'>(sortBy);
+  const [sortLocalType, setSortLocalType] = useState(sortType);
 
   document.title = `Space movies | Library | ${activePage}`;
 
@@ -62,22 +76,14 @@ export default (props: { error: boolean }) => {
 
   const getPage = (page: number) => {
     dispatch({ type: SET_ACTIVE_PAGE, activePage: page });
-    fetchData(
-      libraryUrl(
-        page,
-        '&language=en-US&sort_by=primary_release_date.desc&primary_release_date.lte=now&vote_count.gte=10',
-        genre,
-        voteAverage,
-      ),
-      'GET',
-    );
+    fetchData(libraryUrl(page, genre, voteAverage), 'GET');
   };
 
   const onChangeSortVoteAverage = (
     value: 'desc' | 'asc',
     type: string | undefined,
   ) => {
-    setSortType(String(type));
+    setSortLocalType(String(type));
     setSortBy(value);
   };
 
@@ -95,18 +101,17 @@ export default (props: { error: boolean }) => {
 
   const find = () => {
     dispatch({
-      type: SET_VOTE_AVERAGE,
+      type: SET_SORT,
       voteAverage: LocalVoteAverage,
+      sortBy: sortBY,
+      sortType: sortLocalType,
     });
-    dispatch({ type: SET_ACTIVE_PAGE, activePage: 1 });
 
     fetchData(
-      libraryUrl(
-        1,
-        '&language=en-US&sort_by=primary_release_date.desc&primary_release_date.lte=now&vote_count.gte=10',
-        genre,
-        LocalVoteAverage,
-      ),
+      libraryUrl(1, genre, LocalVoteAverage, {
+        by: sortLocalType,
+        type: sortBY,
+      }),
       'GET',
     );
   };
@@ -116,14 +121,8 @@ export default (props: { error: boolean }) => {
       type: CLEAR_SORT,
     });
     setLocalVoteAverage([0, 10]);
-    setSortType('');
-    fetchData(
-      libraryUrl(
-        1,
-        '&language=en-US&sort_by=primary_release_date.desc&primary_release_date.lte=now&vote_count.gte=10',
-      ),
-      'GET',
-    );
+    setSortLocalType(sortTypes.releaseDate);
+    setSortBy('desc');
   };
 
   return (
@@ -137,26 +136,26 @@ export default (props: { error: boolean }) => {
           <div className='library-sort'>
             <div className='hat-library-sort'>
               <SortBy
-                label='vote average'
-                isChecked={sortType === 'vote average'}
+                label={sortTypes.voteAverage}
+                isChecked={sortLocalType === sortTypes.voteAverage}
                 onChecked={onChangeSortVoteAverage}
                 value={sortBY}
               />
               <SortBy
-                label='vote count'
-                isChecked={sortType === 'vote count'}
+                label={sortTypes.voteCount}
+                isChecked={sortLocalType === sortTypes.voteCount}
                 onChecked={onChangeSortVoteAverage}
                 value={sortBY}
               />
               <SortBy
-                label='popularity'
-                isChecked={sortType === 'popularity'}
+                label={sortTypes.popularity}
+                isChecked={sortLocalType === sortTypes.popularity}
                 onChecked={onChangeSortVoteAverage}
                 value={sortBY}
               />
               <SortBy
-                label='release date'
-                isChecked={sortType === 'release date'}
+                label={sortTypes.releaseDate}
+                isChecked={sortLocalType === sortTypes.releaseDate}
                 onChecked={onChangeSortVoteAverage}
                 value={sortBY}
               />

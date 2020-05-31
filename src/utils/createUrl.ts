@@ -8,13 +8,14 @@ export const defaultLibrary = (
 
 export const libraryUrl = (
   page: number,
-  additionalData = '',
   genre = 0,
   voteAverage = [0, 10],
+  sortBy = { by: 'primary release date', type: 'desc' },
 ): string => {
   const voteAverageQuery = `vote_average.gte=${voteAverage[0]}.0&vote_average.lte=${voteAverage[1]}.0&`;
   const genreQuery = genre !== 0 ? `with_genres=${genre}&` : '';
-  return `discover/movie?api_key=${API_KEY}${additionalData}&${genreQuery}${voteAverageQuery}page=${page}`;
+  const sort = `sort_by=${sortBy.by.replace(' ', '_')}.${sortBy.type}&`;
+  return `discover/movie?api_key=${API_KEY}&language=en-US&${sort}language=en-US&primary_release_date.lte=now&vote_count.gte=10&${genreQuery}${voteAverageQuery}page=${page}`;
 };
 
 export const topMovie = (
