@@ -27,9 +27,10 @@ export default (props: Props) => {
     <div className={classnames(classes.root, 'pagination-blok')}>
       <Pagination
         count={props.countPage}
-        className="pagination"
-        color="secondary"
-        size="large"
+        className='pagination'
+        color='secondary'
+        size='large'
+        style={{ display: Number(props.countPage) <= 1 ? 'none' : 'flex' }}
         onChange={(_: any, value: number) => props.newPage(value)}
         page={props.activePage}
         defaultPage={1}

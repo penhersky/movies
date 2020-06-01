@@ -12,6 +12,8 @@ import { IMAGE_URL } from '../../utils/api';
 
 import { useSnackbar } from 'notistack';
 
+import altImage from '../../image/movieAlt.png';
+
 import './movie-card.scss';
 
 export default ({ data, className }: { data: any; className?: string }) => {
@@ -34,40 +36,42 @@ export default ({ data, className }: { data: any; className?: string }) => {
 
   return (
     <Card className={classNames('movie-card', className)}>
-      <CardActionArea className="movie-card">
-        <div className="add-watch" onClick={add}>
-          <Tooltip title='add to "Will watch"' placement="bottom">
-            <LibraryAddIcon fontSize="large" />
+      <CardActionArea className='movie-card'>
+        <div className='add-watch' onClick={add}>
+          <Tooltip title='add to "Will watch"' placement='bottom'>
+            <LibraryAddIcon fontSize='large' />
           </Tooltip>
         </div>
         <NavLink
           to={`/library/movie/${data.id}`}
           style={{ textDecoration: 'none' }}
         >
-          <div className="card-content">
-            <div className="card-hover">
+          <div className='card-content'>
+            <div className='card-hover'>
               <CardMedia
-                component="img"
-                alt="..."
-                height="400"
-                image={`${IMAGE_URL}w500${
-                  data.poster_path || data.backdrop_path
-                }`}
-                className="card-image"
+                component='img'
+                alt={altImage}
+                height='400'
+                image={
+                  data.poster_path
+                    ? `${IMAGE_URL}w500${data.poster_path}`
+                    : altImage
+                }
+                className='card-image'
               />
             </div>
-            <div className="card-inf">
+            <div className='card-inf'>
               <h2
                 style={{ fontSize: String(data.title).length > 26 ? 18 : 21 }}
               >
                 {data.title}
               </h2>
-              <div className="card-data">
+              <div className='card-data'>
                 <Rating
-                  size="small"
-                  name="half-rating-read"
+                  size='small'
+                  name='half-rating-read'
                   defaultValue={data.vote_average}
-                  className="rating"
+                  className='rating'
                   max={10}
                   readOnly
                 />

@@ -1,11 +1,15 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import { movieReducer } from "./movie";
-import { willWatchReducer } from "./willWatch";
-import { searchReducer } from "./search";
+import { movieReducer } from './movie';
+import { topMovieReducer } from './top';
+import { willWatchReducer } from './willWatch';
+import { searchReducer } from './search';
 
-const rootReducers = combineReducers(
-  { movieReducer, willWatchReducer, searchReducer },
-);
+const rootReducers = combineReducers({
+  movieReducer,
+  topMovieReducer,
+  willWatchReducer,
+  searchReducer,
+});
 
 export default rootReducers;
