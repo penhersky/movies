@@ -12,10 +12,17 @@ export const libraryUrl = (
   voteAverage = [0, 10],
   sortBy = { by: 'primary release date', type: 'desc' },
 ): string => {
-  const voteAverageQuery = `vote_average.gte=${voteAverage[0]}.0&vote_average.lte=${voteAverage[1]}.0&`;
-  const genreQuery = genre !== 0 ? `with_genres=${genre}&` : '';
-  const sort = `sort_by=${sortBy.by.replace(' ', '_')}.${sortBy.type}&`;
-  return `discover/movie?api_key=${API_KEY}&language=en-US&${sort}language=en-US&primary_release_date.lte=now&vote_count.gte=10&${genreQuery}${voteAverageQuery}page=${page}`;
+  const url = new URLSearchParams();
+  url.append('api_key', API_KEY);
+  url.append('language', 'en-US');
+  url.append('sort_by', `${sortBy.by.split(' ').join('_')}.${sortBy.type}`);
+  url.append('primary_release_date.lte', 'now');
+  url.append('vote_count.gte', `10`);
+  url.append('with_genres', genre !== 0 ? genre.toString() : '');
+  url.append('page', page.toString());
+  url.append('vote_average.gte', voteAverage[0].toString() + '.0');
+  url.append('vote_average.lte', voteAverage[1].toString() + '.0');
+  return `discover/movie?` + url.toString();
 };
 
 export const topMovie = (
@@ -23,8 +30,14 @@ export const topMovie = (
   genre = 0,
   voteCountGte = 11000,
 ): string => {
-  const genreQuery = genre !== 0 ? `with_genres=${genre}&` : '';
-  return `discover/movie?api_key=${API_KEY}&language=en-US&sort_by=vote_average.desc&${genreQuery}vote_count.gte=${voteCountGte}&page=${page}`;
+  const url = new URLSearchParams();
+  url.append('api_key', API_KEY);
+  url.append('language', 'en-US');
+  url.append('sort_by', `vote_average.desc`);
+  url.append('vote_count.gte', voteCountGte.toString());
+  url.append('with_genres', genre !== 0 ? genre.toString() : '');
+  url.append('page', page.toString());
+  return `discover/movie?` + url.toString();
 };
 
 export const getMovieById = (id: number) => {
