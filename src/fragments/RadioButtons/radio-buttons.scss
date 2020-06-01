@@ -1,0 +1,10 @@
+@import '../../variables.scss';
+
+.radio-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap row;
+  color: $global-tab-color;
+  margin: 2px;
+}
