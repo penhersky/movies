@@ -64,9 +64,9 @@ export default (props: { error: boolean }) => {
   });
 
   useEffect(() => {
-    if (data.results.length === 0) return;
+    if (data.pages <= 0) return;
     dispatch({ type: SET_MOVIES, movies: data.results });
-  }, [data.results, dispatch]);
+  }, [data, dispatch]);
 
   useEffect(() => {
     if (countPages !== data.total_pages) {
@@ -76,7 +76,13 @@ export default (props: { error: boolean }) => {
 
   const getPage = (page: number) => {
     dispatch({ type: SET_ACTIVE_PAGE, activePage: page });
-    fetchData(libraryUrl(page, genre, voteAverage), 'GET');
+    fetchData(
+      libraryUrl(page, genre, voteAverage, {
+        by: sortLocalType,
+        type: sortBY,
+      }),
+      'GET',
+    );
   };
 
   const onChangeSortVoteAverage = (
@@ -178,7 +184,13 @@ export default (props: { error: boolean }) => {
             />
           </div>
         </SortPanel>
-        <MovieList movies={movies} error={props.error || error} />
+        <MovieList
+          movies={movies}
+          error={props.error || error}
+          typeMessage='warning'
+          bodyMessage='No movies found. Please try again.'
+          titleMessage='Something went wrong ('
+        />
         <Pagination
           activePage={activePage}
           countPage={countPages}
