@@ -6,7 +6,6 @@ export const useFetch = (initialUrl: String, initialReturnData = {}): any => {
   const [url, setUrl] = useState(initialUrl);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       setError(false);
@@ -15,7 +14,6 @@ export const useFetch = (initialUrl: String, initialReturnData = {}): any => {
         const result = await fetch(`${URL}${url}`, {
           method: 'GET',
         }).then((response) => response.json());
-
         setData(result);
       } catch (error) {
         setError(true);
