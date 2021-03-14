@@ -1,32 +1,24 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import clsx from 'clsx';
-import {
-  IconButton,
-  InputBase,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from '@material-ui/core';
+import { IconButton, InputBase, Badge } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { Menu } from '@material-ui/icons';
 import { useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Slide from '@material-ui/core/Slide';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Home, VideoLibrary, Stars } from '@material-ui/icons';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 
 import { SET_SEARCH_MOVIES } from '../../types/movie';
 
-import { WillWatchList } from '../';
+import Drawer from './drawer';
+import WillWatchDialog from './WillWatchDialog';
 
 import useStyles from './styles';
+import img from '../../image/logo.svg';
 
 import './sideBar.scss';
 
@@ -47,20 +39,18 @@ function HideOnScroll(props: Props) {
 }
 
 export default (props: any) => {
-  const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
+  const classes = useStyles(theme as any);
   const [open, setOpen] = useState(false);
-  const [redirect, setRedirect] = useState(false);
-
+  const [will, setWill] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
   const { willWatch } = useSelector((state: any) => state.willWatchReducer);
+
   const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
   };
 
   const [text, setText] = useState('');
@@ -70,25 +60,50 @@ export default (props: any) => {
     e.preventDefault();
     if (text) {
       dispatch({ type: SET_SEARCH_MOVIES, search: text });
-      setRedirect(true);
+      history.push('/library/search');
     }
   };
 
+  React.useEffect(() => setWidth(window.innerWidth), []);
+
   return (
     <>
-      {redirect ? <Redirect to='/library/search' /> : null}
       <HideOnScroll window={props.window}>
         <AppBar className='side-bar'>
           <div className='side-content'>
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              onClick={handleDrawerOpen}
-              edge='start'
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <Menu fontSize='large' />
-            </IconButton>
+            {width < 768 ? (
+              <IconButton
+                color='inherit'
+                aria-label='open drawer'
+                onClick={handleDrawerOpen}
+                edge='start'
+                className={clsx(classes.menuButton, open && classes.hide)}
+              >
+                <Menu fontSize='large' />
+              </IconButton>
+            ) : (
+              <img
+                src={img}
+                alt='logo'
+                className='header-logo'
+                onClick={() => history.push('/')}
+              />
+            )}
+
+            {width > 768 && (
+              <nav className='header-center'>
+                <NavLink exact to='/' className='heder-link'>
+                  Main
+                </NavLink>
+                <NavLink exact to='/library' className='heder-link'>
+                  Library
+                </NavLink>
+                <NavLink exact to='/top' className='heder-link'>
+                  Top
+                </NavLink>
+                <span className='line'></span>
+              </nav>
+            )}
             <div className='right-side'>
               <form className={classes.search} onSubmit={onSubmitSearch}>
                 <div className={classes.searchIcon}>
@@ -105,74 +120,43 @@ export default (props: any) => {
                   inputProps={{ 'aria-label': 'search' }}
                 />
               </form>
+              {width > 768 && (
+                <IconButton
+                  aria-label='Library'
+                  className={classes.menuButton}
+                  color='secondary'
+                  onClick={() => setWill(true)}
+                >
+                  <Badge
+                    badgeContent={willWatch.length}
+                    color='secondary'
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <VideoLibraryIcon
+                      fontSize='large'
+                      style={{ fontSize: 30 }}
+                    />
+                  </Badge>
+                </IconButton>
+              )}
             </div>
           </div>
         </AppBar>
       </HideOnScroll>
 
       <Drawer
-        className={classes.drawer}
-        variant='persistent'
-        anchor='left'
         open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon color='secondary' />
-            ) : (
-              <ChevronRightIcon color='secondary' />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <NavLink
-            exact
-            to='/'
-            className='side-link'
-            onClick={handleDrawerClose}
-          >
-            <ListItem button>
-              <ListItemIcon>
-                <Home color='secondary' />
-              </ListItemIcon>
-              <ListItemText primary={'main'} />
-            </ListItem>
-          </NavLink>
-          <NavLink
-            exact
-            to='/library'
-            className='side-link'
-            onClick={handleDrawerClose}
-          >
-            <ListItem button>
-              <ListItemIcon>
-                <VideoLibrary color='secondary' />
-              </ListItemIcon>
-              <ListItemText primary={'library'} />
-            </ListItem>
-          </NavLink>
-          <NavLink
-            exact
-            to='/top'
-            className='side-link'
-            onClick={handleDrawerClose}
-          >
-            <ListItem button>
-              <ListItemIcon>
-                <Stars color='secondary' />
-              </ListItemIcon>
-              <ListItemText primary={'top'} />
-            </ListItem>
-          </NavLink>
-        </List>
-        <Divider />
-        <WillWatchList WillWatch={willWatch} />
-      </Drawer>
+        onClose={() => setOpen(false)}
+        willWatch={willWatch}
+      />
+      <WillWatchDialog
+        open={will}
+        onClose={() => setWill(false)}
+        willWatch={willWatch}
+      />
     </>
   );
 };

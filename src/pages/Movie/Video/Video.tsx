@@ -10,10 +10,9 @@ import './style.scss';
 export default ({ id }: { id: number }) => {
   const [videos, setVideo] = useState<any[]>([]);
 
-  const [data, loading, error] = useFetch(getMovieVideo(id), initialState);
+  const [data] = useFetch(getMovieVideo(id), initialState);
 
   useEffect(() => {
-    console.log(data);
     if (data?.results) {
       setVideo(data.results);
     }
