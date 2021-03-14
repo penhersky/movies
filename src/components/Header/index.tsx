@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
-import clsx from "clsx";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, Redirect } from 'react-router-dom';
+import clsx from 'clsx';
 import {
   IconButton,
   InputBase,
@@ -11,24 +11,24 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import { Menu } from "@material-ui/icons";
-import { useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Slide from "@material-ui/core/Slide";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { Home, VideoLibrary, Stars } from "@material-ui/icons";
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import { Menu } from '@material-ui/icons';
+import { useTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Slide from '@material-ui/core/Slide';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { Home, VideoLibrary, Stars } from '@material-ui/icons';
 
-import { SET_SEARCH_MOVIES } from "../../types/movie";
+import { SET_SEARCH_MOVIES } from '../../types/movie';
 
-import { WillWatchList } from "../";
+import { WillWatchList } from '../';
 
-import useStyles from "./styles";
+import useStyles from './styles';
 
-import "./sideBar.scss";
+import './sideBar.scss';
 
 interface Props {
   window?: () => Window;
@@ -40,15 +40,13 @@ function HideOnScroll(props: Props) {
   const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide appear={false} direction='down' in={!trigger}>
       {children}
     </Slide>
   );
 }
 
-export default (
-  props: any,
-) => {
+export default (props: any) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -65,7 +63,7 @@ export default (
     setOpen(false);
   };
 
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   const onChangeSearch = (e: any) => setText(e.target.value);
   const onSubmitSearch = (e: any) => {
@@ -78,33 +76,33 @@ export default (
 
   return (
     <>
-      {redirect ? <Redirect to="/library/search" /> : null}
+      {redirect ? <Redirect to='/library/search' /> : null}
       <HideOnScroll window={props.window}>
-        <AppBar className="side-bar">
-          <div className="side-content">
+        <AppBar className='side-bar'>
+          <div className='side-content'>
             <IconButton
-              color="inherit"
-              aria-label="open drawer"
+              color='inherit'
+              aria-label='open drawer'
               onClick={handleDrawerOpen}
-              edge="start"
+              edge='start'
               className={clsx(classes.menuButton, open && classes.hide)}
             >
-              <Menu fontSize="large" />
+              <Menu fontSize='large' />
             </IconButton>
-            <div className="right-side">
+            <div className='right-side'>
               <form className={classes.search} onSubmit={onSubmitSearch}>
                 <div className={classes.searchIcon}>
-                  <SearchIcon fontSize="large" />
+                  <SearchIcon fontSize='large' />
                 </div>
                 <InputBase
-                  placeholder="Search…"
+                  placeholder='Search…'
                   value={text}
                   onChange={onChangeSearch}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
-                  inputProps={{ "aria-label": "search" }}
+                  inputProps={{ 'aria-label': 'search' }}
                 />
               </form>
             </div>
@@ -114,8 +112,8 @@ export default (
 
       <Drawer
         className={classes.drawer}
-        variant="persistent"
-        anchor="left"
+        variant='persistent'
+        anchor='left'
         open={open}
         classes={{
           paper: classes.drawerPaper,
@@ -123,39 +121,52 @@ export default (
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr"
-              ? (
-                <ChevronLeftIcon color="secondary" />
-              )
-              : (
-                <ChevronRightIcon color="secondary" />
-              )}
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon color='secondary' />
+            ) : (
+              <ChevronRightIcon color='secondary' />
+            )}
           </IconButton>
         </div>
         <Divider />
         <List>
-          <NavLink exact to="/" className="side-link">
+          <NavLink
+            exact
+            to='/'
+            className='side-link'
+            onClick={handleDrawerClose}
+          >
             <ListItem button>
               <ListItemIcon>
-                <Home color="secondary" />
+                <Home color='secondary' />
               </ListItemIcon>
-              <ListItemText primary={"main"} />
+              <ListItemText primary={'main'} />
             </ListItem>
           </NavLink>
-          <NavLink exact to="/library" className="side-link">
+          <NavLink
+            exact
+            to='/library'
+            className='side-link'
+            onClick={handleDrawerClose}
+          >
             <ListItem button>
               <ListItemIcon>
-                <VideoLibrary color="secondary" />
+                <VideoLibrary color='secondary' />
               </ListItemIcon>
-              <ListItemText primary={"library"} />
+              <ListItemText primary={'library'} />
             </ListItem>
           </NavLink>
-          <NavLink exact to="/top" className="side-link">
+          <NavLink
+            exact
+            to='/top'
+            className='side-link'
+            onClick={handleDrawerClose}
+          >
             <ListItem button>
               <ListItemIcon>
-                <Stars color="secondary" />
+                <Stars color='secondary' />
               </ListItemIcon>
-              <ListItemText primary={"top"} />
+              <ListItemText primary={'top'} />
             </ListItem>
           </NavLink>
         </List>

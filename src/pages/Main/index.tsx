@@ -1,13 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import Particles from 'react-particles-js';
+import { Button } from '@material-ui/core';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import { MovieCard, Slick } from '../../components';
 import { Message } from '../../fragments';
 
+import logo from '../../image/logo.svg';
+
 import './main.scss';
 
 export default (props: { loading: boolean; error: boolean }) => {
+  const history = useHistory();
   document.title = 'Space movies | Main';
   const { newMovies } = useSelector((state: any) => state.movieReducer);
 
@@ -63,11 +69,34 @@ export default (props: { loading: boolean; error: boolean }) => {
     retina_detect: true,
   };
 
+  const onChangeHandler = () => {
+    history.push('/library');
+  };
+
   return (
     <div className='main'>
-      <h1 id='main-hat-title'>Space Movies</h1>
+      <div>
+        <div className='main-hat'>
+          <img src={logo} alt='Space Movies' className='hat-logo' />
+          <h4 id='hat-sub'>
+            Space of new movies, ratings of the best films from professionals,
+            statistics, descriptions of films and a lot of useful information
+            about what to watch in the evening.
+          </h4>
+          <Button
+            variant='outlined'
+            color='secondary'
+            size='large'
+            style={{ width: 300 }}
+            onClick={onChangeHandler}
+          >
+            GO TO MOVIES
+            <ArrowForwardIosIcon style={{ fontSize: 20, margin: 5 }} />
+          </Button>
+        </div>
 
-      <Particles className='parallax' params={params} />
+        <Particles className='parallax' params={params} />
+      </div>
 
       <div className='main-body'>
         <div className='main-new-movies'>

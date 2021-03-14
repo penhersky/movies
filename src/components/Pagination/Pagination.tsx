@@ -31,7 +31,10 @@ export default (props: Props) => {
         color='secondary'
         size='large'
         style={{ display: Number(props.countPage) <= 1 ? 'none' : 'flex' }}
-        onChange={(_: any, value: number) => props.newPage(value)}
+        onChange={(_: any, value: number) => {
+          props.newPage(value);
+          window.scrollTo({ top: window.innerHeight / 2, behavior: 'smooth' });
+        }}
         page={props.activePage}
         defaultPage={1}
         siblingCount={2}
