@@ -14,36 +14,37 @@
     background-size: cover;
     text-align: center;
   }
-  #main-hat-title {
+  .main-hat {
     position: absolute;
-    font-family: 'Arial';
-    text-transform: uppercase;
-    opacity: 1;
-    z-index: 10;
-    font-size: 90px;
-    text-align: center;
-    top: 47%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, -50%);
-    font-size: 20vh;
-    text-transform: uppercase;
-    background-color: rgba(119, 119, 151, 0.602);
+    height: 89vh;
+    width: 35vw;
+    display: flex;
+    justify-content: center;
+    flex-flow: nowrap column;
+    z-index: 100;
+    color: rgba(255, 255, 255, 0.68);
+    padding: 50px;
     background: linear-gradient(
-      180deg,
-      rgba(48, 48, 45, 0.9107240308232668) 7%,
-      rgba(119, 119, 151, 0.602) 65%
+      90deg,
+      rgba(0, 0, 0, 1) 49%,
+      rgba(255, 255, 255, 0) 100%
     );
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: $global-background;
-    display: table;
-    margin: 20px auto;
+    .hat-logo {
+      width: 500px;
+      margin: 20px 0;
+    }
+    #hat-sub {
+      font-size: 20px;
+      margin: 30px 0;
+      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
+    }
   }
   .main-body {
     display: flex;
     justify-content: center;
     flex-flow: wrap column;
+    align-items: center;
 
     .main-new-movies {
       margin: 50px 0px;
@@ -77,7 +78,11 @@
       align-items: center;
       color: $global-title-color;
       margin: 50px 10px;
-      text-align: center;
+      max-width: 1200px;
+      h4 {
+        text-align: center;
+        margin: 10px;
+      }
       #main-text {
         flex-flow: wrap column;
         width: 90%;
@@ -86,10 +91,70 @@
   }
 }
 
-@media screen and (max-width: 912px) {
+@media screen and (max-width: 1024px) {
   .main {
-    #main-hat-title {
-      font-size: 60px;
+    .main-hat {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) 10%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      .hat-logo {
+        width: 70vw;
+        margin: 20px 0;
+      }
+      #hat-sub {
+        text-align: center;
+        font-size: 18px;
+        margin: 20px 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .main {
+    .main-hat {
+      position: absolute;
+      width: 100vw;
+      display: flex;
+      padding: 5px;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) 10%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      .hat-logo {
+        width: 70vw;
+        margin: 20px 0;
+      }
+      #hat-sub {
+        text-align: center;
+        font-size: 14px;
+        margin: 20px 5px;
+      }
+    }
+    .main-new-movies {
+      margin: 10px 0px;
+    }
+    .main-body {
+      .body-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $global-title-color;
+        margin: 10px 5px;
+        text-align: center;
+      }
     }
   }
 }

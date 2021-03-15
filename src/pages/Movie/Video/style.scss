@@ -1,0 +1,33 @@
+@import '../../../variables.scss';
+
+.video-container {
+  padding: 0 10px;
+  width: 600px;
+  .video {
+    display: flex;
+    justify-content: center;
+    flex-flow: nowrap column;
+    text-align: center;
+    h4 {
+      color: $global-revers-color;
+      font-size: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .video-container {
+    padding: 0;
+    width: 300px;
+    .video {
+      display: flex;
+      justify-content: center;
+      flex-flow: nowrap column;
+      text-align: center;
+      h4 {
+        color: $global-revers-color;
+        font-size: 20px;
+      }
+    }
+  }
+}

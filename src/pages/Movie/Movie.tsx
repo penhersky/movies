@@ -6,6 +6,7 @@ import { Rating } from '@material-ui/lab';
 
 import { Loading } from '../../components';
 import { Message, Parallax } from '../../fragments';
+import Video from './Video/Video';
 
 import './movie.scss';
 import { IMAGE_URL } from '../../utils/api';
@@ -129,6 +130,7 @@ export default (props: any) => {
                   </div>
                 </div>
               </div>
+              <Video id={+id} />
               <div className='overview'>
                 <h3>Overview</h3>
                 <p>&ensp;&ensp;{movie.overview}</p>

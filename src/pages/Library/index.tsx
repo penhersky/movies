@@ -137,60 +137,66 @@ export default (props: { error: boolean }) => {
       <div>
         <Parallax img={image} title='Library' opacity={0.5} />
       </div>
-      <div className='content'>
-        <SortPanel>
-          <div className='library-sort'>
-            <div className='hat-library-sort'>
-              <SortBy
-                label={sortTypes.voteAverage}
-                isChecked={sortLocalType === sortTypes.voteAverage}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
-              />
-              <SortBy
-                label={sortTypes.voteCount}
-                isChecked={sortLocalType === sortTypes.voteCount}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
-              />
-              <SortBy
-                label={sortTypes.popularity}
-                isChecked={sortLocalType === sortTypes.popularity}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
-              />
-              <SortBy
-                label={sortTypes.releaseDate}
-                isChecked={sortLocalType === sortTypes.releaseDate}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
+      <div>
+        <div className='content'>
+          <SortPanel>
+            <div className='library-sort'>
+              <div className='hat-library-sort'>
+                <SortBy
+                  label={sortTypes.voteAverage}
+                  isChecked={sortLocalType === sortTypes.voteAverage}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+                <SortBy
+                  label={sortTypes.voteCount}
+                  isChecked={sortLocalType === sortTypes.voteCount}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+                <SortBy
+                  label={sortTypes.popularity}
+                  isChecked={sortLocalType === sortTypes.popularity}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+                <SortBy
+                  label={sortTypes.releaseDate}
+                  isChecked={sortLocalType === sortTypes.releaseDate}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+              </div>
+              <RangeSlider
+                value={LocalVoteAverage}
+                label='Vote average'
+                onChange={onChangeVoteAverage}
+                width={200}
               />
             </div>
-            <RangeSlider
-              value={LocalVoteAverage}
-              label='Vote average'
-              onChange={onChangeVoteAverage}
-              width={200}
-            />
-          </div>
 
-          <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
-          <div className='button-group'>
-            <IconButton Icon={ClearIcon} onClick={clear} tooltip='Clear' />
-            <IconButton
-              Icon={FindReplaceIcon}
-              onClick={find}
-              tooltip='Find or refresh'
+            <RadioButtons
+              list={genres}
+              onChange={onChangeGenres}
+              value={genre}
             />
-          </div>
-        </SortPanel>
-        <MovieList
-          movies={movies}
-          error={props.error || error}
-          typeMessage='warning'
-          bodyMessage='No movies found. Please try again.'
-          titleMessage='Something went wrong ('
-        />
+            <div className='button-group'>
+              <IconButton Icon={ClearIcon} onClick={clear} tooltip='Clear' />
+              <IconButton
+                Icon={FindReplaceIcon}
+                onClick={find}
+                tooltip='Find or refresh'
+              />
+            </div>
+          </SortPanel>
+          <MovieList
+            movies={movies}
+            error={props.error || error}
+            typeMessage='warning'
+            bodyMessage='No movies found. Please try again.'
+            titleMessage='Something went wrong ('
+          />
+        </div>
         <Pagination
           activePage={activePage}
           countPage={countPages}
