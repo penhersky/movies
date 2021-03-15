@@ -1,5 +1,60 @@
 @import '../../variables.scss';
 
 .will-dialog {
-  background-color: $global-background;
+  color: $global-revers-color;
+  background-color: $global-primary-background;
+  width: 560px;
+  height: 600px;
+  .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .content-will {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .list {
+    display: flex;
+    flex-flow: nowrap column;
+    justify-content: flex-start;
+    height: 100%;
+  }
+  .will-item-dialog {
+    background-color: $global-primary-background;
+    cursor: pointer;
+    width: 500px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    margin: 5px 0;
+    .item-content {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+    }
+    img {
+      height: 100px;
+    }
+    .will-content {
+      display: flex;
+      flex-flow: column nowrap;
+      padding: 5px 10px;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: $global-revers-color;
+      p {
+        font-size: 18px;
+        margin: 0;
+      }
+      .rating-will {
+        margin: 10px 0;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
+  }
 }

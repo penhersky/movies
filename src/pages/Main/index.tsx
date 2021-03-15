@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import Particles from 'react-particles-js';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import { MovieCard, Slick } from '../../components';
@@ -125,43 +125,43 @@ export default (props: { loading: boolean; error: boolean }) => {
 
         <div className='body-text'>
           <div id='main-text'>
-            <h1>Terms of use</h1>
-            <p>
+            <Typography variant='h4'>Terms of use</Typography>
+            <Typography>
               1. All used audiovisual materials, links to which are posted on
               the website, are the property of their manufacturer (owner of
               rights) and are protected by international legal conventions.
-            </p>
-            <p>
+            </Typography>
+            <Typography>
               2. You can use these materials only if the use is made for
               educational purposes. These materials are intended for
               informational purposes only - for other purposes you must buy a
               licensed entry.
-            </p>
-            <p>
+            </Typography>
+            <Typography>
               3. All links to resources on the Web that contain videos and other
               intellectual property are posted for free by visitors of the
               resource for advertising or for informational purposes. Any
               information on the site is automatically posted without any
               control from any side, which corresponds to the generally accepted
               world practice of posting information on the Internet.
-            </p>
-            <p>
+            </Typography>
+            <Typography>
               4. The subject of the commercial aspect of this resource is the
               maintenance and development of infrastructure that allows you to
               most comfortably view demo audiovisual products, regardless of
               what is being watched. The video materials presented on the
               resource are not the subject of financial relations between users
               and site owners.
-            </p>
-            <p>
+            </Typography>
+            <Typography>
               5. Using this resource, the user agrees that he is 18 years old
               and assumes the risks associated with the possible harm caused by
               the use of information in published materials.
-            </p>
-            <p>
+            </Typography>
+            <Typography>
               5. This resource was created exclusively for non-commercial
               purposes. And does not bring any financial benefits.
-            </p>
+            </Typography>
           </div>
         </div>
       </div>
