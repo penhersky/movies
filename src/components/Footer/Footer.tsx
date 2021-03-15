@@ -18,9 +18,9 @@ export default () => {
       <div className='center'>
         <a href='https://github.com/penhersky/movies'>repository</a>
       </div>
-      <Typography>© {new Date().getFullYear()} Space Movies</Typography>
 
       <Typography className='alpha'>Early access ( alpha )</Typography>
+      <Typography>© {new Date().getFullYear()} Space Movies</Typography>
     </footer>
   );
 };

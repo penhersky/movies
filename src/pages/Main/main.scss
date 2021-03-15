@@ -16,14 +16,14 @@
   }
   .main-hat {
     position: absolute;
-    height: 89vh;
+    height: 100vh;
     width: 35vw;
     display: flex;
     justify-content: center;
     flex-flow: nowrap column;
-    z-index: 100;
+    z-index: 10;
     color: rgba(255, 255, 255, 0.68);
-    padding: 50px;
+    padding-left: 50px;
     background: linear-gradient(
       90deg,
       rgba(0, 0, 0, 1) 49%,
@@ -36,6 +36,7 @@
     #hat-sub {
       font-size: 20px;
       margin: 30px 0;
+      max-width: 500px;
       font-family: 'Merriweather', serif;
       font-family: 'Poppins', sans-serif;
     }
