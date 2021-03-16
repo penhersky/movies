@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import ReactGa from 'react-ga';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardActionArea, CardMedia, Tooltip } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
@@ -37,10 +38,24 @@ export default ({ data, className }: { data: any; className?: string }) => {
     enqueueSnackbar(`Movie "${data.title}" added to Will watch`, {
       anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
     });
+    ReactGa.event({
+      category: 'click',
+      action: `save to will watch: ${data.title}`,
+    });
   }, [enqueueSnackbar, dispatch, data, exist]);
 
+  const onMoveMouseHandler = () => {
+    ReactGa.event({
+      category: 'hover',
+      action: `hover movie: ${data.title}`,
+    });
+  };
+
   return (
-    <Card className={classNames('movie-card', className)}>
+    <Card
+      className={classNames('movie-card', className)}
+      onMouseMove={onMoveMouseHandler}
+    >
       <CardActionArea className='movie-card'>
         {exist ? null : (
           <div className='add-watch' onClick={add}>

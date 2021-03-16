@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import ReactGa from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Pagination, MovieList, SortPanel } from '../../components';
+import { Pagination, MovieList, SortPanel, SEO } from '../../components';
 import { Parallax, Spinner, RadioButtons } from '../../fragments';
 
 import { topMovie } from '../../utils/createUrl';
@@ -57,10 +58,32 @@ export default (props: Page) => {
 
     dispatch({ type: SET_ACTIVE_TOP100_PAGE, activeTopPage: 1 });
     fetchData(topMovie(1, id, 200), 'GET');
+
+    ReactGa.event({
+      category: 'click',
+      action: `click [top] genre: ${
+        genres.find((item: any) => item.id === id)?.name
+      }`,
+    });
   };
 
   return (
     <>
+      <SEO
+        title='top 100 best movies of all time. And also for each genre.'
+        description={`top 100 best movies of all time. And also for each genre. ${topMovies
+          .slice(0, 5)
+          .map((item: any) => item.title)
+          .join(', ')}`}
+        keywords={[
+          'Space Movies',
+          'movies',
+          'movie trailers',
+          'descriptions of movie premieres',
+          'movie ratings',
+          'top 100 movie',
+        ]}
+      />
       {loading ? <Spinner /> : null}
       <Parallax title='top 100 movies' img={img} opacity={0.6} />
       <div className='content'>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import ReactGa from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ClearIcon from '@material-ui/icons/Clear';
 import FindReplaceIcon from '@material-ui/icons/FindReplace';
 
-import { MovieList, Pagination, SortPanel } from '../../components';
+import { MovieList, Pagination, SortPanel, SEO } from '../../components';
 import {
   Parallax,
   Spinner,
@@ -103,6 +104,13 @@ export default (props: { error: boolean }) => {
       type: SET_GENRE,
       genre: id,
     });
+
+    ReactGa.event({
+      category: 'click',
+      action: `click genre: ${
+        genres.find((item: any) => item.id === id)?.name
+      }`,
+    });
   };
 
   const find = () => {
@@ -133,6 +141,21 @@ export default (props: { error: boolean }) => {
 
   return (
     <>
+      <SEO
+        title='Library with the best and latest movies.'
+        description={`Library with the best and latest movies. ${movies
+          .slice(0, 5)
+          .map((item: any) => item.title)
+          .join(', ')}`}
+        keywords={[
+          'Space Movies',
+          'movies',
+          'movie trailers',
+          'descriptions of movie premieres',
+          'movie ratings',
+          'movie library',
+        ]}
+      />
       {loading ? <Spinner /> : null}
       <div>
         <Parallax img={image} title='Library' opacity={0.5} />
