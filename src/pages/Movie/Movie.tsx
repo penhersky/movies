@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import ReactGa from 'react-ga';
+
 import { useFetch } from '../../hooks';
 import { getMovieById } from '../../utils/createUrl';
 
@@ -26,6 +28,13 @@ export default (props: any) => {
 
   useEffect(() => {
     setMovie(data);
+  }, [data]);
+
+  useEffect(() => {
+    ReactGa.event({
+      category: 'review',
+      action: `open movie page: ${data.title}`,
+    });
   }, [data]);
 
   const showItems = (list: any[]) => (
