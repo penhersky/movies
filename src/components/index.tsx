@@ -8,3 +8,4 @@ export { default as Slick } from './Slick/Slick';
 export { default as SortPanel } from './sortPanel/SortPanel';
 export { default as MovieList } from './MovieList/MovieList';
 export { default as Footer } from './Footer/Footer';
+export { default as SEO } from './SEO';
