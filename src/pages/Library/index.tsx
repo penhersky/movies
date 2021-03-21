@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ClearIcon from '@material-ui/icons/Clear';
 import FindReplaceIcon from '@material-ui/icons/FindReplace';
 
-import { MovieList, Pagination, SortPanel, SEO } from '../../components';
+import { MovieList, Pagination, Surface, SEO } from '../../components';
 import {
   Parallax,
   Spinner,
@@ -13,9 +13,11 @@ import {
   RadioButtons,
   RangeSlider,
   SortBy,
+  Genre,
+  Title,
 } from '../../fragments';
 
-import { libraryUrl } from '../../utils/createUrl';
+import { libraryUrl, defaultLibrary } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
 import { useLazyFetch } from '../../hooks';
 
@@ -54,8 +56,6 @@ export default (props: { error: boolean }) => {
   const [LocalVoteAverage, setLocalVoteAverage] = useState(voteAverage);
   const [sortBY, setSortBy] = useState<'desc' | 'asc'>(sortBy);
   const [sortLocalType, setSortLocalType] = useState(sortType);
-
-  document.title = `Space movies | Library | ${activePage}`;
 
   const dispatch = useDispatch();
 
@@ -137,12 +137,13 @@ export default (props: { error: boolean }) => {
     setLocalVoteAverage([0, 10]);
     setSortLocalType(sortTypes.releaseDate);
     setSortBy('desc');
+    fetchData(defaultLibrary(1), 'GET');
   };
 
   return (
     <>
       <SEO
-        title='Library with the best and latest movies.'
+        title={`${activePage} | Library with the best and latest movies.`}
         description={`Library with the best and latest movies. ${movies
           .slice(0, 5)
           .map((item: any) => item.title)
@@ -160,11 +161,18 @@ export default (props: { error: boolean }) => {
       <div>
         <Parallax img={image} title='Library' opacity={0.5} />
       </div>
-      <div>
+      <div className='container'>
         <div className='content'>
-          <SortPanel>
+          <Surface>
             <div className='library-sort'>
               <div className='hat-library-sort'>
+                <Title>Sort By</Title>
+                <SortBy
+                  label={sortTypes.releaseDate}
+                  isChecked={sortLocalType === sortTypes.releaseDate}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
                 <SortBy
                   label={sortTypes.voteAverage}
                   isChecked={sortLocalType === sortTypes.voteAverage}
@@ -183,25 +191,20 @@ export default (props: { error: boolean }) => {
                   onChecked={onChangeSortVoteAverage}
                   value={sortBY}
                 />
-                <SortBy
-                  label={sortTypes.releaseDate}
-                  isChecked={sortLocalType === sortTypes.releaseDate}
-                  onChecked={onChangeSortVoteAverage}
-                  value={sortBY}
-                />
               </div>
+              <Title>Vote average</Title>
               <RangeSlider
                 value={LocalVoteAverage}
-                label='Vote average'
                 onChange={onChangeVoteAverage}
                 width={200}
               />
             </div>
-
+            <Title>Genre</Title>
             <RadioButtons
               list={genres}
               onChange={onChangeGenres}
               value={genre}
+              Checkbox={Genre}
             />
             <div className='button-group'>
               <IconButton Icon={ClearIcon} onClick={clear} tooltip='Clear' />
@@ -211,7 +214,7 @@ export default (props: { error: boolean }) => {
                 tooltip='Find or refresh'
               />
             </div>
-          </SortPanel>
+          </Surface>
           <MovieList
             movies={movies}
             error={props.error || error}

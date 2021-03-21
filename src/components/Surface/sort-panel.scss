@@ -1,12 +1,14 @@
 @import '../../variables.scss';
 
 .sort-panel {
-  background-color: $global-primary-background;
+  overflow: hidden;
   border-radius: 3px;
   height: max-content;
   width: 80%;
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   flex-flow: wrap row;
+  font-family: Roboto;
+  max-width: 400px;
 }

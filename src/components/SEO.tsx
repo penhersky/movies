@@ -16,7 +16,7 @@ function SEO({
         lang: 'en',
       }}
       title={title}
-      titleTemplate={`${title} | Space Movies`}
+      titleTemplate={`Space Movies | ${title}`}
       meta={[
         {
           name: `description`,

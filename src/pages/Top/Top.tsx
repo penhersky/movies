@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import ReactGa from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Pagination, MovieList, SortPanel, SEO } from '../../components';
-import { Parallax, Spinner, RadioButtons } from '../../fragments';
+import { Pagination, MovieList, Surface, SEO } from '../../components';
+import { Parallax, Spinner, RadioButtons, Genre, Title } from '../../fragments';
 
 import { topMovie } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
@@ -20,7 +20,6 @@ import genres from '../../utils/genresList';
 
 import { Page } from '../../types/props';
 export default (props: Page) => {
-  document.title = `Space movies | TOP | ${props.activePage}`;
   const dispatch = useDispatch();
 
   const { topMovies, activeTopPage, genre } = useSelector(
@@ -70,7 +69,7 @@ export default (props: Page) => {
   return (
     <>
       <SEO
-        title='top 100 best movies of all time. And also for each genre.'
+        title={`${activeTopPage} | top 100 best movies of all time. And also for each genre.`}
         description={`top 100 best movies of all time. And also for each genre. ${topMovies
           .slice(0, 5)
           .map((item: any) => item.title)
@@ -86,11 +85,19 @@ export default (props: Page) => {
       />
       {loading ? <Spinner /> : null}
       <Parallax title='top 100 movies' img={img} opacity={0.6} />
-      <div className='content'>
-        <SortPanel>
-          <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
-        </SortPanel>
-        <MovieList movies={topMovies} error={props.error || error} />
+      <div className='container'>
+        <div className='content'>
+          <Surface>
+            <Title>Genre</Title>
+            <RadioButtons
+              list={genres}
+              onChange={onChangeGenres}
+              value={genre}
+              Checkbox={Genre}
+            />
+          </Surface>
+          <MovieList movies={topMovies} error={props.error || error} />
+        </div>
         <Pagination
           activePage={activeTopPage}
           countPage={5}

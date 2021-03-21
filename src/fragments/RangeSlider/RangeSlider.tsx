@@ -1,10 +1,8 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
 export default (props: {
   value: number[];
-  label: string;
   marks?: { value: number; label: string }[];
   width?: number;
   onChange: (value: number[]) => void;
@@ -14,10 +12,16 @@ export default (props: {
   };
 
   return (
-    <div style={{ width: props.width || 300 }}>
-      <Typography id='range-slider' color='secondary' gutterBottom>
-        {props.label}
-      </Typography>
+    <div
+      style={{
+        width: props.width || 300,
+        display: 'flex',
+        justifyContent: 'center',
+        flexFlow: 'column',
+        alignItems: 'center',
+        margin: '10px 0',
+      }}
+    >
       <Slider
         value={props.value}
         onChange={handleChange}

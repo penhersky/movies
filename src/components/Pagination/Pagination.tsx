@@ -33,7 +33,7 @@ export default (props: Props) => {
         style={{ display: Number(props.countPage) <= 1 ? 'none' : 'flex' }}
         onChange={(_: any, value: number) => {
           props.newPage(value);
-          window.scrollTo({ top: window.innerHeight / 2, behavior: 'smooth' });
+          window.scrollTo({ top: window.innerHeight / 3, behavior: 'smooth' });
         }}
         page={props.activePage}
         defaultPage={1}

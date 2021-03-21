@@ -19,7 +19,7 @@ export default () => {
         <a href='https://github.com/penhersky/movies'>repository</a>
       </div>
 
-      <Typography className='alpha'>Early access ( alpha )</Typography>
+      <Typography className='alpha'>beta testing</Typography>
       <Typography>© {new Date().getFullYear()} Space Movies</Typography>
     </footer>
   );
