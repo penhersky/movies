@@ -1,0 +1,44 @@
+@import '../../variables.scss';
+
+.genre-item {
+  width: 220px;
+  height: 50px;
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: linear 0.3s;
+  .genre-fon {
+    transition: linear 0.3s;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgb(3, 3, 29);
+    background: linear-gradient(
+      0deg,
+      rgba(3, 3, 29, 1) 0%,
+      rgba(3, 3, 29, 0) 100%
+    );
+    .genre-label {
+      margin: 10px;
+    }
+  }
+  &:hover {
+    background-position: top;
+  }
+}
+
+.genre-checked {
+  .genre-fon {
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+    background-color: #03031d;
+    text-transform: uppercase;
+  }
+}

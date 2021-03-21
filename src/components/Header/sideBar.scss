@@ -6,6 +6,48 @@
     flex-flow: nowrap row;
     justify-content: space-between;
     margin: 0 10px;
+    .header-logo {
+      height: 40px;
+      margin: 0 40px;
+      cursor: pointer;
+    }
+    .header-center {
+      width: 350px;
+      height: 40px;
+      display: flex;
+      flex-flow: nowrap row;
+      justify-content: space-between;
+      align-items: center;
+
+      .heder-link {
+        --fill-color: #546e7a;
+        --background-color: #d6e4ff;
+        position: relative;
+        display: block;
+        padding: 4px 0;
+        margin: 0 10px;
+        font: 1000 27px Raleway, sans-serif;
+        text-decoration: none;
+        text-transform: uppercase;
+        -webkit-text-stroke: 2px var(--fill-color);
+        background: linear-gradient(var(--background-color) 0 100%) left / 0
+          no-repeat;
+        color: transparent;
+        background-clip: text;
+        transition: 0.3s linear;
+
+        &:hover {
+          background-size: 100%;
+        }
+      }
+      .active {
+        background-color: white;
+      }
+    }
+    .right-side {
+      display: flex;
+      flex-flow: nowrap row;
+    }
   }
 }
 

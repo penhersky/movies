@@ -19,7 +19,7 @@ export default ({ children }: { children?: any[] }) => {
     loop: true,
     loopFillGroupWithBlank: true,
     autoplay: {
-      delay: 2000,
+      delay: 3500,
       disableOnInteraction: true,
     },
     coverflowEffect: {
@@ -36,7 +36,7 @@ export default ({ children }: { children?: any[] }) => {
   };
 
   return (
-    <div className="slick">
+    <div className='slick'>
       <Swiper {...params}>{children}</Swiper>
     </div>
   );

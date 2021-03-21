@@ -32,7 +32,7 @@
       }
       .movie-detail {
         max-width: 600px;
-        min-width: 500px;
+        min-width: 300px;
         display: flex;
         flex-flow: wrap column;
         padding: 5px 20px;
@@ -57,26 +57,37 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 768px) {
   .movie-page {
     .movie-container {
+      .movie-page-title {
+        margin: 5px;
+        font-size: 25px;
+      }
+      .movie-rating {
+        margin-bottom: 10px;
+      }
       .movie-detail-data {
+        .movie-page-poster {
+          width: 300px;
+        }
         .movie-detail {
+          width: 250px;
+          display: flex;
+          flex-flow: wrap column;
+          justify-content: center;
+          align-items: center;
           text-align: center;
+          padding: 0px 5px;
+          .movie-detail-tem {
+            width: 250px;
+            p {
+              margin: 11px 0;
+            }
+          }
         }
       }
-    }
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .movie-page {
-    .movie-container {
-      .movie-detail-data {
-        .movie-detail {
-          justify-content: flex-start;
-        }
-      }
+      margin: 10px 5px 10px 5px;
     }
   }
 }

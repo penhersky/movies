@@ -47,3 +47,9 @@ export const getMovieById = (id: number) => {
 export const searchMovie = (text: string, page = 1) => {
   return `search/movie?api_key=${API_KEY}&query=${text}&page=${page}`;
 };
+
+// additionally
+
+export const getMovieVideo = (id: number) => {
+  return `movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+};

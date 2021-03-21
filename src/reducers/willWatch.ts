@@ -35,7 +35,7 @@ export const willWatchReducer = (
   action: WillWatchAction,
 ) => {
   switch (action.type) {
-    case ADD_TO_WILL_WATCH:
+    case ADD_TO_WILL_WATCH: {
       return {
         willWatch: [
           ...state.willWatch,
@@ -44,10 +44,12 @@ export const willWatchReducer = (
             title: action.title,
             poster: action.poster_path,
             rating: action.vote_average,
-            realizeData: action.vote_average,
+            realizeData: action.release_date,
           },
         ],
       };
+    }
+
     case DELETE_FROM_WILL_WATCH:
       return {
         willWatch: state.willWatch.filter((item) => item.id !== action.id),

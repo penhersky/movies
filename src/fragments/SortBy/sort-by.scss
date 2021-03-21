@@ -2,18 +2,30 @@
 
 .sort-by {
   color: $global-tab-color;
+  border: 1px solid $global-tab-color;
   transition: linear 0.2s;
-  margin: 3px;
+  margin: 2px;
+  padding: 5px;
   display: flex;
   justify-content: center;
+  width: 100%;
   align-items: center;
   cursor: pointer;
   p {
-    margin: 0;
-    font-size: 20px;
+    margin: 0 5px;
+    font-size: 16px;
+    text-transform: uppercase;
   }
 }
 
 .sort-checked {
   color: $scroll-bar-color;
+  border: 1px solid $scroll-bar-color;
+  justify-content: space-around;
+}
+
+@media (max-width: 600px) {
+  .sort-by {
+    width: 100%;
+  }
 }

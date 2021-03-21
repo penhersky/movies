@@ -2,11 +2,12 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  position: sticky;
 }
 
 .library-sort {
   display: flex;
-  flex-flow: wrap column;
+  flex-flow: wrap row;
   justify-content: center;
   align-items: center;
   width: 100%;

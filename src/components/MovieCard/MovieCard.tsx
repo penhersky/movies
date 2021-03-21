@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import ReactGa from 'react-ga';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardActionArea, CardMedia, Tooltip } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import classNames from 'classnames';
@@ -19,8 +20,13 @@ import './movie-card.scss';
 export default ({ data, className }: { data: any; className?: string }) => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
+  const { willWatch } = useSelector((state: any) => state.willWatchReducer);
+
+  const exist = willWatch.find((item: any) => item.id === data.id);
 
   const add = useCallback(() => {
+    if (exist) return;
+
     dispatch({
       type: ADD_TO_WILL_WATCH,
       id: data.id,
@@ -32,16 +38,33 @@ export default ({ data, className }: { data: any; className?: string }) => {
     enqueueSnackbar(`Movie "${data.title}" added to Will watch`, {
       anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
     });
-  }, [enqueueSnackbar, dispatch, data]);
+    ReactGa.event({
+      category: 'click',
+      action: `save to will watch: ${data.title}`,
+    });
+  }, [enqueueSnackbar, dispatch, data, exist]);
+
+  const onMoveMouseHandler = () => {
+    ReactGa.event({
+      category: 'hover',
+      action: `hover movie: ${data.title}`,
+    });
+  };
 
   return (
-    <Card className={classNames('movie-card', className)}>
+    <Card
+      className={classNames('movie-card', className)}
+      onMouseMove={onMoveMouseHandler}
+    >
       <CardActionArea className='movie-card'>
-        <div className='add-watch' onClick={add}>
-          <Tooltip title='add to "Will watch"' placement='bottom'>
-            <LibraryAddIcon fontSize='large' />
-          </Tooltip>
-        </div>
+        {exist ? null : (
+          <div className='add-watch' onClick={add}>
+            <Tooltip title='add to "Will watch"' placement='bottom'>
+              <LibraryAddIcon fontSize='large' />
+            </Tooltip>
+          </div>
+        )}
+
         <NavLink
           to={`/library/movie/${data.id}`}
           style={{ textDecoration: 'none' }}

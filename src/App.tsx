@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
+import ReactGA from 'react-ga';
 
 import './App.scss';
 
@@ -26,6 +27,9 @@ const theme = createMuiTheme({
 });
 
 export default () => {
+  React.useEffect(() => {
+    ReactGA.initialize(process.env.REACT_APP_GOOGLE as string);
+  });
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider maxSnack={3}>

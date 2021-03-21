@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import ReactGa from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ClearIcon from '@material-ui/icons/Clear';
 import FindReplaceIcon from '@material-ui/icons/FindReplace';
 
-import { MovieList, Pagination, SortPanel } from '../../components';
+import { MovieList, Pagination, Surface, SEO } from '../../components';
 import {
   Parallax,
   Spinner,
@@ -12,9 +13,11 @@ import {
   RadioButtons,
   RangeSlider,
   SortBy,
+  Genre,
+  Title,
 } from '../../fragments';
 
-import { libraryUrl } from '../../utils/createUrl';
+import { libraryUrl, defaultLibrary } from '../../utils/createUrl';
 import { initialState } from '../../utils/api';
 import { useLazyFetch } from '../../hooks';
 
@@ -53,8 +56,6 @@ export default (props: { error: boolean }) => {
   const [LocalVoteAverage, setLocalVoteAverage] = useState(voteAverage);
   const [sortBY, setSortBy] = useState<'desc' | 'asc'>(sortBy);
   const [sortLocalType, setSortLocalType] = useState(sortType);
-
-  document.title = `Space movies | Library | ${activePage}`;
 
   const dispatch = useDispatch();
 
@@ -103,6 +104,13 @@ export default (props: { error: boolean }) => {
       type: SET_GENRE,
       genre: id,
     });
+
+    ReactGa.event({
+      category: 'click',
+      action: `click genre: ${
+        genres.find((item: any) => item.id === id)?.name
+      }`,
+    });
   };
 
   const find = () => {
@@ -129,68 +137,92 @@ export default (props: { error: boolean }) => {
     setLocalVoteAverage([0, 10]);
     setSortLocalType(sortTypes.releaseDate);
     setSortBy('desc');
+    fetchData(defaultLibrary(1), 'GET');
   };
 
   return (
     <>
+      <SEO
+        title={`${activePage} | Library with the best and latest movies.`}
+        description={`Library with the best and latest movies. ${movies
+          .slice(0, 5)
+          .map((item: any) => item.title)
+          .join(', ')}`}
+        keywords={[
+          'Space Movies',
+          'movies',
+          'movie trailers',
+          'descriptions of movie premieres',
+          'movie ratings',
+          'movie library',
+        ]}
+      />
       {loading ? <Spinner /> : null}
       <div>
         <Parallax img={image} title='Library' opacity={0.5} />
       </div>
-      <div className='content'>
-        <SortPanel>
-          <div className='library-sort'>
-            <div className='hat-library-sort'>
-              <SortBy
-                label={sortTypes.voteAverage}
-                isChecked={sortLocalType === sortTypes.voteAverage}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
-              />
-              <SortBy
-                label={sortTypes.voteCount}
-                isChecked={sortLocalType === sortTypes.voteCount}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
-              />
-              <SortBy
-                label={sortTypes.popularity}
-                isChecked={sortLocalType === sortTypes.popularity}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
-              />
-              <SortBy
-                label={sortTypes.releaseDate}
-                isChecked={sortLocalType === sortTypes.releaseDate}
-                onChecked={onChangeSortVoteAverage}
-                value={sortBY}
+      <div className='container'>
+        <div className='content'>
+          <Surface>
+            <div className='library-sort'>
+              <div className='hat-library-sort'>
+                <Title>Sort By</Title>
+                <SortBy
+                  label={sortTypes.releaseDate}
+                  isChecked={sortLocalType === sortTypes.releaseDate}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+                <SortBy
+                  label={sortTypes.voteAverage}
+                  isChecked={sortLocalType === sortTypes.voteAverage}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+                <SortBy
+                  label={sortTypes.voteCount}
+                  isChecked={sortLocalType === sortTypes.voteCount}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+                <SortBy
+                  label={sortTypes.popularity}
+                  isChecked={sortLocalType === sortTypes.popularity}
+                  onChecked={onChangeSortVoteAverage}
+                  value={sortBY}
+                />
+              </div>
+              <Title>Vote average</Title>
+              <RangeSlider
+                value={LocalVoteAverage}
+                onChange={onChangeVoteAverage}
+                width={200}
               />
             </div>
-            <RangeSlider
-              value={LocalVoteAverage}
-              label='Vote average'
-              onChange={onChangeVoteAverage}
-              width={200}
+            <Title>Genre</Title>
+            <RadioButtons
+              list={genres}
+              onChange={onChangeGenres}
+              value={genre}
+              Checkbox={Genre}
             />
-          </div>
-
-          <RadioButtons list={genres} onChange={onChangeGenres} value={genre} />
-          <div className='button-group'>
-            <IconButton Icon={ClearIcon} onClick={clear} tooltip='Clear' />
-            <IconButton
-              Icon={FindReplaceIcon}
-              onClick={find}
-              tooltip='Find or refresh'
-            />
-          </div>
-        </SortPanel>
-        <MovieList
-          movies={movies}
-          error={props.error || error}
-          typeMessage='warning'
-          bodyMessage='No movies found. Please try again.'
-          titleMessage='Something went wrong ('
-        />
+            <div className='button-group'>
+              <IconButton Icon={ClearIcon} onClick={clear} tooltip='Clear' />
+              <IconButton
+                Icon={FindReplaceIcon}
+                onClick={find}
+                tooltip='Find or refresh'
+              />
+            </div>
+          </Surface>
+          <MovieList
+            movies={movies}
+            error={props.error || error}
+            typeMessage='warning'
+            bodyMessage='No movies found. Please try again.'
+            titleMessage='Something went wrong ('
+          />
+        </div>
         <Pagination
           activePage={activePage}
           countPage={countPages}

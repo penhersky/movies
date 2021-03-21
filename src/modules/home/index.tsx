@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Toolbar from '@material-ui/core/Toolbar';
+import ReactGa from 'react-ga';
 
 import { Main, Library, MoviePage, Top, SearchMoviesPage } from '../../pages';
 import { Header, Loading, Footer } from '../../components';
@@ -23,6 +24,7 @@ import { initialState } from '../../utils/api';
 export default () => {
   const [TopPages, setTopPages] = useState({ countPage: 5, activePage: 1 });
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [data, loading, error] = useFetch(defaultLibrary(1), initialState);
 
@@ -62,7 +64,10 @@ export default () => {
   useEffect(() => {
     setTopUrl(topMovie(TopPages.activePage));
   }, [TopPages.activePage, setTopUrl]);
-  // */
+
+  useEffect(() => {
+    ReactGa.pageview(location.pathname + location.search);
+  }, [location]);
 
   const path = [
     '/',
